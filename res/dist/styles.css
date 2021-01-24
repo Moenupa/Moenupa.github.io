@@ -1,0 +1,23 @@
+body .homepage.container-fluid {
+  width: 100%;
+  height: 100%;
+}
+body .container {
+  display: flex;
+  flex-flow: column wrap;
+}
+body .container .banner {
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: row wrap;
+  margin: 10px 0;
+}
+body .container .banner > * {
+  flex: 1;
+}
+body .container .banner * {
+  width: auto;
+  height: inherit;
+}

@@ -1,0 +1,30 @@
+$banner-height: 60px;
+
+body {
+	// header nav {
+	// 	padding: 0 100px;
+	// }
+	.homepage.container-fluid {
+		width: 100%;
+		height: 100%;
+	}
+	.container {
+		display: flex;
+		flex-flow: column wrap;
+		.banner {
+			height: $banner-height;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-flow: row wrap;
+			margin: 10px 0;
+			> * {
+				flex:1;
+			}
+			* {
+				width: auto;
+				height: inherit;
+			}
+		}
+	}
+}
