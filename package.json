@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@mdi/font": "5.9.55",
-    "@nuxtjs/vuetify": "1.11.3",
+    "@nuxtjs/vuetify": "1.12.1",
     "core-js": "3.12.1",
     "nuxt": "2.15.6",
     "nuxt-clipboard": "0.0.4",
