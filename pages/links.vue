@@ -17,23 +17,9 @@
           <v-divider class="mx-4"></v-divider>
 
           <v-card-actions>
-            <NuxtLink
-              v-if="item.link.charAt(0) == '/'"
-              :to="item.link"
-              class="text-decoration-none"
-            >
-              <v-btn
-                text
-                :color="`purple ${
-                  $vuetify.theme.dark ? 'lighten-2' : 'darken-2'
-                }`"
-                >visit</v-btn
-              >
-            </NuxtLink>
             <v-btn
-              v-else
+              v-bind="isLocal(item.link) ? {to: item.link, nuxt} : {href: item.link}"
               text
-              :href="item.link"
               :color="`purple ${
                 $vuetify.theme.dark ? 'lighten-2' : 'darken-2'
               }`"
@@ -77,6 +63,11 @@ export default {
       source: "https://source.unsplash.com/random/",
       links: [],
     };
+  },
+  methods: {
+    isLocal(url) {
+      return url.charAt(0) == '/';
+    }
   },
   async fetch() {
     const homepage_gist =

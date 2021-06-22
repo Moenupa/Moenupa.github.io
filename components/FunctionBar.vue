@@ -56,16 +56,16 @@
     </v-tooltip>
     <v-tooltip left>
       <template v-slot:activator="{ on, attrs }">
-        <NuxtLink to="/links" class="text-decoration-none">
-          <v-btn
-            v-bind="attrs"
-            v-on="on"
-            fab
-            small
-          >
-          <v-icon>mdi-map-marker-radius</v-icon>
-          </v-btn>
-        </NuxtLink>
+        <v-btn
+          v-bind="attrs"
+          v-on="on"
+          fab
+          small
+          to="/links"
+          nuxt
+        >
+        <v-icon>mdi-map-marker-radius</v-icon>
+        </v-btn>
       </template>
       <span>Navigation Page</span>
     </v-tooltip>
