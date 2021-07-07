@@ -45,7 +45,7 @@
         <v-btn
           v-bind="attrs"
           v-on="on"
-          @click="switchTheme()"
+          @click="$themer.darkmode.switch()"
           fab
           small
         >
@@ -89,6 +89,7 @@ export default {
       bottom: true,
       left: false,
       transition: 'slide-y-reverse-transition',
+      visible: false
     }
   },
   methods: {
@@ -100,21 +101,15 @@ export default {
         window.scroll(0, window.pageYOffset - 50)
       }, 20)
     },
-    scrollListener: function (e) {
+    onScroll: function (e) {
       this.visible = window.scrollY > 150
-    },
-    switchTheme () {
-      this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
     }
   },
   mounted: function () {
-    window.addEventListener('scroll', this.scrollListener);
-    if (window.matchMedia("(prefers-color-theme: dark)").matches)
-      this.$vuetify.theme.dark = true;
-    else this.$vuetify.theme.dark = false;
+    window.addEventListener('scroll', this.onScroll);
   },
   beforeDestroy: function () {
-    window.removeEventListener('scroll', this.scrollListener);
+    window.removeEventListener('scroll', this.onScroll);
   }
 }
 </script>

@@ -1,34 +1,33 @@
 <template>
-  <v-container>
+  <v-container class="d-flex align-center justify-center">
     <v-row justify="space-around">
-      <v-col cols="6" sm="4" lg="3" v-for="(item, index) in links" :key="index">
+      <v-col cols="6" sm="4" lg="3" v-for="link in links" :key="link.id">
         <v-card max-width="374" min-width="240">
           <v-img
             height="250"
-            :src="item.img ? item.img : source + '?' + item.name"
+            :src="link.img ? link.img : source + '?' + link.name"
+            :alt="link.name"
           ></v-img>
 
-          <v-card-title class="text-capitalize">{{ item.name }}</v-card-title>
+          <v-card-title class="text-capitalize">{{ link.name }}</v-card-title>
 
           <v-card-text>
-            <div>{{ item.description }}</div>
+            {{ link.description }}
           </v-card-text>
 
           <v-divider class="mx-4"></v-divider>
 
           <v-card-actions>
             <v-btn
-              v-bind="isLocal(item.link) ? {to: item.link, nuxt} : {href: item.link}"
+              v-bind="isLocal(link.link) ? {to: link.link, nuxt: true} : {href: link.link}"
               text
-              :color="`purple ${
-                $vuetify.theme.dark ? 'lighten-2' : 'darken-2'
-              }`"
+              :color="$themer.color.seeded('visit')"
               >visit
             </v-btn>
             <v-btn
               text
-              :color="`blue ${$vuetify.theme.dark ? 'darken-3' : 'lighten-2'}`"
-              v-for="extra in item.extras"
+              :color="$themer.color.seeded(extra.name)"
+              v-for="extra in link.extras"
               :key="extra.id"
               :href="extra.link"
               ><v-icon left v-if="extra.icon">{{ extra.icon }}</v-icon
@@ -61,21 +60,50 @@ export default {
   data() {
     return {
       source: "https://source.unsplash.com/random/",
-      links: [],
+      links: [
+        {
+          "name":"homepage",
+          "description":"My personal homepage. Contains nearly everything you'll need to know about me.",
+          "link":"/",
+          "extras":[
+            {
+              "icon":"mdi-github",
+              "name":"github",
+              "link":"https://github.com/Moenupa/homepage"
+            }
+          ]
+        },
+        {
+          "name":"about",
+          "description":"Page for information and acknowledgement.",
+          "link":"/about",
+          "extras":[
+            {
+              "icon":"mdi-github",
+              "name":"source",
+              "link":"https://github.com/Moenupa/homepage"
+            }
+          ]
+        },
+        {
+          "name":"blog",
+          "description":"A blog of my own study record. [in development]",
+          "link":"/blog",
+          "extras":[
+            {
+              "icon":"mdi-github",
+              "name":"source",
+              "link":"https://github.com/Moenupa/homepage/tree/master/content"
+            }
+          ]
+        }
+      ],
     };
   },
   methods: {
     isLocal(url) {
       return url.charAt(0) == '/';
     }
-  },
-  async fetch() {
-    const homepage_gist =
-      "https://gist.githubusercontent.com/Moenupa/3c84c5c4d627330cd6a16df84a051877/raw";
-    this.links = await fetch(homepage_gist + "/links.json").then((res) =>
-      res.json()
-    );
-  },
-  layout: "simple",
+  }
 };
 </script>

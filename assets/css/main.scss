@@ -1,0 +1,45 @@
+$numbers: (
+  "h1": 400 3rem normal #F44336,
+  "h2": 400 2.125rem -.0073529412em #E91E63,
+  "h3": 400 1.5rem normal #2196F3,
+  "h4": 500 1.25rem -.0125em #009688,
+  "h5": 400 1.25rem -.0125em #CDDC39,
+  "h6": 300 1.25rem -.0125em #FF9800,
+  "p": 400 1rem .03125em
+);
+
+#post {
+  @each $i, $styles in $numbers {
+    #{$i} {
+      font-weight: nth($styles, 1);
+      font-size: nth($styles, 2);
+      letter-spacing: nth($styles, 3);
+      @if (length($styles) > 3) { color: nth($styles, 4) };
+    }
+  }
+  a, a:after {
+    display: inline-block;
+    font: normal normal normal 24px/1 "Material Design Icons";
+    font-size: inherit;
+    text-rendering: auto;
+    line-height: inherit;
+    -webkit-font-smoothing: antialiased;
+    text-decoration: none;
+  }
+  a[href]:not([aria-hidden]):after {
+    content: "\F03CC";
+  }
+  a[href]:not([aria-hidden]):hover, a[href]:not([aria-hidden]):hover:after {
+    text-decoration: underline;
+  }
+  img {
+    width: 100%;
+  }
+  pre, img {
+    border-radius: 4px !important;
+  }
+  pre code {
+    background: transparent !important;
+    padding: 0 !important;
+  }
+}

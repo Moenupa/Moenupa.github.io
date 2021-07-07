@@ -1,22 +1,28 @@
 {
-  "name": "Moenupa.homepage",
-  "version": "1.2.2",
+  "name": "blog",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate",
-    "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup",
-    "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
-    "lint": "npm run lint:js"
+    "generate": "nuxt generate"
   },
   "dependencies": {
-    "@mdi/font": "5.9.55",
-    "@nuxtjs/vuetify": "1.12.1",
-    "core-js": "3.15.0",
-    "nuxt": "2.15.7",
+    "@nuxt/content": "1.14.0",
+    "@nuxtjs/vuetify": "1.11.3",
+    "core-js": "3.9.1",
+    "nuxt": "2.15.3",
     "nuxt-clipboard": "0.0.4",
-    "sass": "1.35.1"
+    "prism-themes": "^1.7.0",
+    "raw-loader": "^4.0.2",
+    "sass": "1.35.1",
+    "vuetify-markdown-editor": "^3.3.3"
+  },
+  "babel": {
+    "plugins": [
+      "@babel/plugin-proposal-class-properties",
+      "@babel/plugin-proposal-private-methods"
+    ]
   }
 }

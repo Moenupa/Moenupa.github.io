@@ -5,7 +5,7 @@
         <v-card class="pa-4 mt-4" justify="center" align="center">
           <div class="my-2">
             <v-avatar size="160">
-              <img id="selfie" src="/img/87535316_p0.png" alt="" />
+              <v-img id="selfie" src="/img/main.png" alt=""/>
               <!-- author link: https://www.pixiv.net/users/23223750 -->
             </v-avatar>
           </div>
@@ -161,22 +161,16 @@
 </template>
 
 <style>
-p:last-child {
-  margin-bottom: 0;
-}
 pre {
   white-space: pre-wrap;
   overflow: auto !important;
-}
-#selfie {
-  object-fit: cover;
 }
 </style>
 
 <script>
 export default {
   head: {
-    title: "Moenupa's Homepage",
+    title: "Homepage",
     meta: [
       { hid: "keywords", name: "keywords", content: "Moenupa" },
       { hid: "keywords", name: "keywords", content: "Homepage" },
@@ -234,6 +228,7 @@ export default {
       }
     }
   },
-  mounted() {}
+  mounted() {},
+  layout: 'fill'
 };
 </script>

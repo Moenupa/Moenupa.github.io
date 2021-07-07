@@ -64,6 +64,8 @@
 
 <script>
 export default {
-  layout: 'simple'
+  head: {
+    title: "About"
+  }
 }
 </script>

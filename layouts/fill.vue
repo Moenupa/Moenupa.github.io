@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-main class="d-flex align-center justify-center">
+    <v-main class="d-flex justify-center align-center" :style="`background: linear-gradient(${$vuetify.theme.dark ? '#33333333, #333333cc 80%' : '#cccccc33, #cccccccc 80%'}),left top / cover url(/img/main.png) no-repeat fixed;`">
       <Nuxt />
       <FunctionBar />
     </v-main>
@@ -30,21 +30,8 @@ body {
 
 <script>
 export default {
-  methods: {
-    initDarkMode() {
-      const darkMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-
-      darkMediaQuery.addEventListener('change', (e) => {
-        this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
-      });
-
-      if (darkMediaQuery.matches) {
-        setTimeout(() => this.$vuetify.theme.dark = true, 0);
-      }
-    }
-  },
   mounted() {
-    this.initDarkMode();
+    this.$themer.darkmode.init();
   }
 }
 </script>
