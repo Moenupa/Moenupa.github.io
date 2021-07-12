@@ -1,7 +1,7 @@
 ---
 title: Format Testing
 description: Format Testing of nuxt content
-img: /img/main.png
+img: https://img.src/not/valid
 alt: my first blog post
 authors: 
   - moenupa
@@ -11,42 +11,336 @@ tags:
   - javascript
   - web development
 ---
-Welcome to my first blog post using content module
+This is intended as a quick reference and showcase. For more complete info, see [John Gruber's original spec](http://daringfireball.net/projects/markdown/) and the [Github-flavored Markdown info page](http://github.github.com/github-flavored-markdown/).
 
-## This is a heading
+This cheatsheet is specifically *Markdown Here's* version of Github-flavored Markdown. This differs slightly in styling and syntax from what Github uses, so what you see below might vary a little from what you get in a *Markdown Here* email, but it should be pretty close.
 
-This is some more info
+## Headers
 
-<div class="bg-blue-500 text-white p-4 mb-4">
-  This is HTML inside markdown that has a class some classes
-</div>
-
-```js
-export default {
-  nuxt: "is the best"
-}
 ```
+# H1
+## H2
+### H3
+#### H4
+##### H5
+###### H6
+
+Alternatively, for H1 and H2, an underline-ish style:
+
+Alt-H1
+======
+
+Alt-H2
+------
+
+```
+# H1
+## H2
+### H3
+#### H4
+##### H5
+###### H6
+
+Alternatively, for H1 and H2, an underline-ish style:
+
+Alt-H1
+======
+
+Alt-H2
+------
+
+## Emphasis
+
+```md
+Emphasis, aka italics, with *asterisks* or _underscores_.
+
+Strong emphasis, aka bold, with **asterisks** or __underscores__.
+
+Combined emphasis with **asterisks and _underscores_**.
+```
+
+Emphasis, aka italics, with *asterisks* or _underscores_.
+
+Strong emphasis, aka bold, with **asterisks** or __underscores__.
+
+Combined emphasis with **asterisks and _underscores_**.
+
+## Lists
+
+```md
+1. First ordered list item
+2. Another item
+    * Unordered sub-list. 
+1. Actual numbers don't matter, just that it's a number
+    1. Ordered sub-list
+4. And another item.  
+   
+   Some text that should be aligned with the above item.
+
+* Unordered list can use asterisks
+- Or minuses
++ Or pluses
+```
+
+1. First ordered list item
+2. Another item
+   * Unordered sub-list. 
+1. Actual numbers don't matter, just that it's a number
+    1. Ordered sub-list
+2. And another item.  
+   
+   Some text that should be aligned with the above item.
+
+* Unordered list can use asterisks
+- Or minuses
++ Or pluses
+
+## Links
+
+There are two ways to create links.
+
+```md
+[I'm an inline-style link](https://www.google.com)
+
+[I'm a reference-style link][Arbitrary case-insensitive reference text]
+
+[You can use numbers for reference-style link definitions][1]
+
+Or leave it empty and use the [link text itself][]
+
+Some text to show that the reference links can follow later.
+
+[arbitrary case-insensitive reference text]: https://www.mozilla.org
+[1]: http://slashdot.org
+[link text itself]: http://www.reddit.com
+```
+
+[I'm an inline-style link](https://www.google.com)
+
+[I'm a reference-style link][Arbitrary case-insensitive reference text]
+
+[You can use numbers for reference-style link definitions][1]
+
+Or leave it empty and use the [link text itself][]
+
+Some text to show that the reference links can follow later.
+
+[arbitrary case-insensitive reference text]: https://www.mozilla.org
+[1]: http://slashdot.org
+[link text itself]: http://www.reddit.com
+
+## Images
+
+```md
+Here's our logo (hover to see the title text):
+
+Inline-style: 
+![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+
+Reference-style: 
+![alt text][logo]
+
+[logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 2"
+```
+
+Here's our logo (hover to see the title text):
+
+Inline-style: 
+![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+
+Reference-style: 
+![alt text][logo]
+
+[logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 2"
+
+## Tables
+
+```md
+|                |ASCII                          |HTML                         |
+|----------------|-------------------------------|-----------------------------|
+|Single backticks|`'Isn't this fun?'`            |'Isn't this fun?'            |
+|Quotes          |`"Isn't this fun?"`            |"Isn't this fun?"            |
+|Dashes          |`-- is en-dash, --- is em-dash`|-- is en-dash, --- is em-dash|
+```
+
+|                |ASCII                          |HTML                         |
+|----------------|-------------------------------|-----------------------------|
+|Single backticks|`'Isn't this fun?'`            |'Isn't this fun?'            |
+|Quotes          |`"Isn't this fun?"`            |"Isn't this fun?"            |
+|Dashes          |`-- is en-dash, --- is em-dash`|-- is en-dash, --- is em-dash|
+
+```md
+| left-aligned column | centered column | right-aligned column |
+| :------------------ | :-------------: | -------------------: |
+|   content content   | content content |   content content    |
+```
+
+| left-aligned column | centered column | right-aligned column |
+| :------------------ | :-------------: | -------------------: |
+|   content content   | content content |   content content    |
+
+```md
+| overflow | overflow | overflow | overflow | overflow | overflow | overflow | overflow | overflow | overflow |
+| :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: |
+| :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: |
+```
+
+| overflow | overflow | overflow | overflow | overflow | overflow | overflow | overflow | overflow | overflow | overflow | overflow | overflow | overflow | overflow | overflow | overflow | overflow | overflow | overflow |
+| :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: |
+| :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: |
+
+## Code and Syntax Highlighting
+
+Code blocks are part of the Markdown spec, but syntax highlighting isn't. However, many renderers -- like Github's and *Markdown Here* -- support syntax highlighting. *Markdown Here* supports highlighting for dozens of languages (and not-really-languages, like diffs and HTTP headers); to see the complete list, and how to write the language names, see the [highlight.js demo page](http://softwaremaniacs.org/media/soft/highlight/test.html).
+
+```md
+Inline `code` has `back-ticks around` it.
+```
+
+Inline `code` has `back-ticks around` it.
+
+Blocks of code are either fenced by lines with three back-ticks <code>```</code>, or are indented with four spaces. I recommend only using the fenced code blocks -- they're easier and only they support syntax highlighting.
+
+```md
+    ```javascript
+    var s = "JavaScript syntax highlighting";
+    alert(s);
+    ```
+
+    ```python
+    s = "Python syntax highlighting"
+    print s
+    ```
+
+    ```
+    No language indicated, so no syntax highlighting. 
+    But let's throw in a <b>tag</b>.
+    ```
+```
+
+```javascript
+var s = "JavaScript syntax highlighting";
+alert(s);
+```
+
+```python
+s = "Python syntax highlighting"
+print s
+```
+
+```
+No language indicated, so no syntax highlighting in Markdown Here (varies on Github). 
+But let's throw in a <b>tag</b>.
+```
+
+(Github Wiki pages don't seem to support syntax highlighting, so the above won't be colourful (the strings are not red, for example). Try it out in a *Markdown Here* email or a Github Markdown README or Github Issue -- you can preview a new Issue without submitting it.)
+
+Again, to see what languages are available for highlighting, and how to write those language names, see the [highlight.js demo page](http://softwaremaniacs.org/media/soft/highlight/test.html).
+
+## Blockquotes
+
+```md
+> Blockquotes are very handy in email to emulate reply text.  
+> This line is part of the same quote.
+
+Quote break.
+
+> This is a very long line that will still be quoted properly when it wraps. Oh boy let's keep writing to make sure this is long enough to actually wrap for everyone. Oh, you can *put* **Markdown** into a blockquote. 
+```
+
+> Blockquotes are very handy in email to emulate reply text.  
+> This line is part of the same quote.
+
+Quote break.
+
+> This is a very long line that will still be quoted properly when it wraps. Oh boy let's keep writing to make sure this is long enough to actually wrap for everyone. Oh, you can *put* **Markdown** into a blockquote. 
+
+## Inline HTML
+
+You can also use raw HTML in your Markdown, and it'll mostly work pretty well. Here are a couple of common examples:
 
 ```html
-<p>code styling is easy</p>
+<p>Press<kbd>Ctrl</kbd>+<kbd>W</kbd>to close this window</p>
 ```
 
-### This is a sub heading
-This is some more info
+<p>Press<kbd>Ctrl</kbd>+<kbd>W</kbd>to close this window</p>
 
-### This is another sub heading
-This is some more info
+Github-flavored Markdown supports a special table syntax, but *Markdown Here* does not support it yet. [There's an issue for it.](https://github.com/adam-p/markdown-here/issues/13)
 
-## heading 2
+## Horizontal Rule
 
-### Heading 3
+```md
+Three or more...
 
-#### Heading 4
+---
 
-##### Heading 5
+Hyphens
 
-###### Heading 6
+***
 
-following this [external link](https://moenupa.github.io) would lead you to my homepage, and this [internal link](#this-is-a-heading)
+Asterisks
 
-![alt text](/img/main.png)
+___
+
+Underscores
+```
+
+Three or more...
+
+---
+
+Hyphens
+
+***
+
+Asterisks
+
+___
+
+Underscores
+
+## Line Breaks
+
+My basic recommendation for learning how line breaks work is to experiment and discover -- hit &lt;Enter&gt; once, then hit it twice, see what happens. You'll soon learn to get what you want. "Markdown Toggle" is your friend. 
+
+Here are some things to try out:
+
+```md
+With only a single newline, this line and
+this line will be a *single line*.
+
+But this one is separated by two newlines and so will be a *separate paragraph*.
+
+This line has two spaces at the end (hard for you to see, but trust me!).  
+So this is a separate line in the *same paragraph*.
+```
+
+With only a single newline, this line and
+this line will be a *single line*.
+
+But this one is separated by two newlines and so will be a *separate paragraph*.
+
+This line has two spaces at the end (hard for you to see, but trust me!).  
+So this is a separate line in the *same paragraph*.
+
+## Equation
+
+Inline equation $ \Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,. $ 
+or $$ \Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,. $$
+
+And block of equation:
+
+$$
+\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
+$$
+
+## Remark Plugins
+
+!> Here is a tip.
+
+?> And a warning.
+
+x> Or an error.  
+
+!> Tip or warning or error can be multiline \[Not Recommanded\]  
+Just as this tip demonstrates

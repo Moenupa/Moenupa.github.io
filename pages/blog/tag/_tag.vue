@@ -6,14 +6,29 @@
           <v-card-subtitle>
             <v-avatar>
               <v-img
-                :src="tag.img"
+                :lazy-src="$themer.gallery.loading"
+                :src="$themer.gallery.get(tag.img, tag.slug)"
                 :alt="tag.slug"
-              ></v-img>
+              >
+                <template v-slot:placeholder>
+                  <v-row
+                    class="fill-height ma-0"
+                    align="center"
+                    justify="center"
+                  >
+                    <!-- <v-progress-circular
+                      indeterminate
+                      color="grey lighten-5"
+                    ></v-progress-circular> -->
+                    <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_kJNwM4.json"  background="#ddd" speed="1" loop autoplay></lottie-player>
+                  </v-row>
+                </template>
+              </v-img>
             </v-avatar>
             <v-btn 
               small
               text
-              :color="$themer.color.seeded(tag.slug, true)"
+              :color="$themer.color.seeded(tag.slug)"
             >
               {{ tag.name }}
               <v-icon right>mdi-tag-text-outline</v-icon>
@@ -47,6 +62,21 @@
 
 <script>
 export default {
+  head() {
+    const title = `${this.tag.name}`;
+    const titleTemplate = `Blog - Tag: %s`
+    const keywords = `${this.tag.name}, moenupa, blog, post`
+    const description = `posts about ${this.tag.name}`
+    const meta = [
+      { hid: "keywords", name: "keywords", content: keywords },
+      { hid: "description", name: "description", content: description }
+    ]
+    return {
+      title,
+      titleTemplate,
+      meta
+    }
+  },
   data() {
     return {
       masonaryCols: 4
@@ -54,6 +84,7 @@ export default {
   },
   async asyncData({ $content, params }) {
     const tags = await $content('tags')
+      .without('body')
       .where({ slug: { $contains: params.tag } })
       .limit(1)
       .fetch()

@@ -6,21 +6,21 @@
       app
       permanent
     >
+      <v-list-item
+        link
+        router
+        to="/blog"
+        exact
+      >
+        <v-list-item-icon>
+          <v-icon>mdi-view-dashboard</v-icon>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <v-list-item-title>Blog Dashboard</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+      <v-divider class="my-2" />
       <v-list nav dense>
-        <v-list-item
-          link
-          router
-          to="/blog"
-          exact
-        >
-          <v-list-item-icon>
-            <v-icon>mdi-view-dashboard</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title>Dashboard</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-divider class="my-2" />
         <v-list-item
           v-for="heading in article.toc"
           :key="heading.id"
@@ -56,12 +56,32 @@
                   indeterminate
                 ></v-progress-linear>
               </template>
-              <v-img :src="article.img" :alt="article.alt" height="250"></v-img>
-              <v-card-title class="text-h3">{{ article.title }}</v-card-title>
-              <v-card-subtitle class="text-h6">
+              <v-img
+                height="250"
+                :lazy-src="$themer.gallery.loading"
+                :src="$themer.gallery.get(article.img, article.slug)"
+                :alt="article.alt"
+              >
+                <template v-slot:placeholder>
+                  <v-row
+                    class="fill-height ma-0"
+                    align="center"
+                    justify="center"
+                  >
+                    <!-- <v-progress-circular
+                      indeterminate
+                      color="grey lighten-5"
+                    ></v-progress-circular> -->
+                    <lottie-player src="https://assets3.lottiefiles.com/private_files/lf30_czmjkzqg.json"  background="transparent" speed="1" loop autoplay>
+                    </lottie-player>
+                  </v-row>
+                </template>
+              </v-img>
+              <v-card-title class="text-h3 px-sm-4 px-md-8 px-lg-16">{{ article.title }}</v-card-title>
+              <v-card-subtitle class="text-h6 px-sm-4 px-md-8 px-lg-16">
                 {{ article.description }}
               </v-card-subtitle>
-              <v-card-actions>
+              <v-card-actions class="px-sm-4 px-md-8 px-lg-16">
                 <v-row>
                   <v-col cols="4">
                     <v-btn 
@@ -95,7 +115,7 @@
                 </v-row>
                 
               </v-card-actions>
-              <v-card-text>
+              <v-card-text class="px-sm-4 px-md-8 px-lg-16">
                 <v-chip-group v-model="selection" column>
                   <v-chip
                     v-for="
@@ -115,7 +135,7 @@
               <v-divider class="my-4" />
               <!-- <v-btn block @click="expand = !expand">{{ expand ? 'close' : 'open'}}</v-btn> -->
               <v-expand-transition>
-                <nuxt-content class="pa-4" id="post" :document="article" v-show="expand" />
+                <nuxt-content class="py-4 px-sm-4 px-md-8 px-lg-16" id="post" :document="article" v-show="expand" />
               </v-expand-transition>
             </v-card>
           </v-col>
@@ -126,7 +146,23 @@
   </v-app>
 </template>
 <script>
+import Prism from '~/plugins/prism'
 export default {
+  head() {
+    const title = `${this.article.title}`;
+    const titleTemplate = `Post - %s`
+    const keywords = `${this.article.tags.join(', ')}, moenupa, blog, post`
+    const description = `${this.article.description}`
+    const meta = [
+      { hid: "keywords", name: "keywords", content: keywords },
+      { hid: "description", name: "description", content: description }
+    ]
+    return {
+      title,
+      titleTemplate,
+      meta
+    }
+  },
   data() {
     return {
       expand: false,
@@ -154,6 +190,7 @@ export default {
   },
   mounted() {
     setTimeout(() => {this.expand = true;}, 1000)
+    Prism.highlightAll()
   },
   methods: {
     formatDate(date) {

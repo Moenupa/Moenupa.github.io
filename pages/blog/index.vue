@@ -7,6 +7,7 @@
         </v-expand-transition>
         <v-card>
           <v-parallax
+            :lazy-src="$themer.gallery.loading"
             src="/img/main_md.png"
             class="my-16"
             :height="loading? '500': '300'"
@@ -83,6 +84,16 @@
 
 <script>
 export default {
+  head: {
+    title: "Blog",
+    meta: [
+      { hid: "keywords", name: "keywords", content: `post, moenupa, blog` },
+      { hid: "description", name: "description", content: `posts in Moenupa's blog` }
+    ],
+    script: [
+      
+    ]
+  },
   data() {
     return {
       windowSize: [],

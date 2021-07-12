@@ -12,7 +12,8 @@ export default {
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { hid: "description", name: "description", content: "" }
+      { hid: "description", name: "description", content: "" },
+      { hid: "keywords", name: "keywords", content: "moenupa, homepage, blog" }
     ],
     link: [
       {
@@ -20,6 +21,12 @@ export default {
         type: "image/x-icon",
         href: "/onemore-flat.ico",
         alt: "/favicon.ico"
+      }
+    ],
+    script: [
+      {
+        src:
+          "https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"
       }
     ]
   },
@@ -30,6 +37,7 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     { src: "~/plugins/themer" }
+    //{ src: "~/plugins/lottie" },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -50,10 +58,13 @@ export default {
 
   // Content module configuration: https://go.nuxtjs.dev/config-content
   content: {
+    liveEdit: false,
     markdown: {
       prism: {
         theme: "prism-themes/themes/prism-material-dark.css"
       },
+      remarkPlugins: ["remark-math", "remark-gfm", "remark-hint"],
+      rehypePlugins: ["rehype-mathjax"],
       tocDepth: 6
     }
   },

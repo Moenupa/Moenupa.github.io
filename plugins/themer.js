@@ -23,6 +23,7 @@ export default ({ $vuetify }, inject) => {
       ],
       hierarchy: [0, 1, 2, 5, 7, 8, 9, 11, 12, 13, 15],
       hash(str) {
+        if (!str) return 0;
         return str.split("").reduce((a, b) => {
           a = (a << 5) - a + b.charCodeAt(0);
           return a & a;
@@ -30,8 +31,8 @@ export default ({ $vuetify }, inject) => {
       },
       adjust(bg) {
         if (bg ^ $vuetify.theme.dark) return " lighten-2";
-        else if (bg) return "";
-        else return " darken-2";
+        else if (bg) return " darken-2";
+        else return "";
       },
       seeded(str, bg) {
         return (
@@ -80,6 +81,16 @@ export default ({ $vuetify }, inject) => {
       },
       filter(slug, col, arr, cols) {
         return arr.findIndex(src => slug == src.slug) % cols == col - 1;
+      }
+    },
+    gallery: {
+      source: "https://source.unsplash.com/random/",
+      loading:
+        "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIj4KPHJlY3QgZmlsbD0iIzE2MDAzNCIgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMDAiLz4KPC9zdmc+",
+      get(src, slug) {
+        if (src) return src;
+        else if (slug) return `${this.source}${slug}`;
+        else return null;
       }
     }
   };
