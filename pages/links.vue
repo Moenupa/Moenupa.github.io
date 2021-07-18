@@ -3,11 +3,9 @@
     <v-row justify="space-around">
       <v-col cols="6" sm="4" lg="3" v-for="link in links" :key="link.id">
         <v-card max-width="374" min-width="240">
-          <v-img
-            height="250"
-            :src="link.img ? link.img : source + '?' + link.name"
-            :alt="link.name"
-          ></v-img>
+          <v-img-lottie
+            :img="{ src: null, slug: link.name, type: 0 }"
+          ></v-img-lottie>
 
           <v-card-title class="text-capitalize">{{ link.name }}</v-card-title>
 

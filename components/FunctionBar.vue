@@ -9,6 +9,7 @@
     :open-on-hover="hover"
     :transition="transition"
     id="function-bar"
+    style="position: fixed; z-index: 999;"
   >
     <template v-slot:activator>
       <v-tooltip left>
@@ -71,11 +72,7 @@
     </v-tooltip>
   </v-speed-dial>
 </template>
-<style scoped>
-#function-bar {
-  position: fixed
-}
-</style>
+
 <script>
 export default {
   data () {

@@ -56,27 +56,10 @@
                   indeterminate
                 ></v-progress-linear>
               </template>
-              <v-img
-                height="250"
-                :lazy-src="$themer.gallery.loading"
-                :src="$themer.gallery.get(article.img, article.slug)"
-                :alt="article.alt"
+              <v-img-lottie
+                :img="{ src: article.img, slug: article.slug, type: 0, height: 300 }"
               >
-                <template v-slot:placeholder>
-                  <v-row
-                    class="fill-height ma-0"
-                    align="center"
-                    justify="center"
-                  >
-                    <!-- <v-progress-circular
-                      indeterminate
-                      color="grey lighten-5"
-                    ></v-progress-circular> -->
-                    <lottie-player src="https://assets3.lottiefiles.com/private_files/lf30_czmjkzqg.json"  background="transparent" speed="1" loop autoplay>
-                    </lottie-player>
-                  </v-row>
-                </template>
-              </v-img>
+              </v-img-lottie>
               <v-card-title class="text-h3 px-sm-4 px-md-8 px-lg-16">{{ article.title }}</v-card-title>
               <v-card-subtitle class="text-h6 px-sm-4 px-md-8 px-lg-16">
                 {{ article.description }}
@@ -122,8 +105,8 @@
                       chip of [
                         { icon: 'mdi-text-box-outline', text: wordCount(article.body) + ' words' },
                         { icon: 'mdi-timer-sand', text: estimate(article.body) + ' mins' },
-                        { icon: 'mdi-creation', text: 'Created: ' + formatDate(article.createdAt) },
-                        { icon: 'mdi-update', text: 'Updated: ' + formatDate(article.updatedAt) },
+                        { icon: 'mdi-creation', text: 'Created: ' + $utils.date.format(article.createdAt) },
+                        { icon: 'mdi-update', text: 'Updated: ' + $utils.date.format(article.updatedAt) },
                       ]"
                     :key="chip.id"
                   >
@@ -141,6 +124,7 @@
           </v-col>
         </v-row>
       </v-container>
+      <v-footer-blog :mod="{ inset: true }"></v-footer-blog>
       <FunctionBar />
     </v-main>
   </v-app>
@@ -193,10 +177,6 @@ export default {
     Prism.highlightAll()
   },
   methods: {
-    formatDate(date) {
-      const options = { year: 'numeric', month: 'long', day: 'numeric' }
-      return new Date(date).toLocaleDateString('en', options)
-    },
     estimate(root) {
       return Math.ceil(this.wordCount(root) / 275);
     },
@@ -205,7 +185,7 @@ export default {
       return (!root.children) ? words(root) : words(root) + root.children.reduce((s, c) => {return s + this.wordCount(c)}, 0);
     }
   },
-  layout: 'none'
+  layout: 'raw'
 }
 </script>
 

@@ -5,31 +5,16 @@
         <v-card>
           <v-card-subtitle>
             <v-avatar>
-              <v-img
-                :lazy-src="$themer.gallery.loading"
-                :src="$themer.gallery.get(author.img, author.slug)"
-                :alt="author.slug"
+              <v-img-lottie
+                :img="{ src: author.img, slug: author.slug, type: 1, height: -1 }"
               >
-                <template v-slot:placeholder>
-                  <v-row
-                    class="fill-height ma-0"
-                    align="center"
-                    justify="center"
-                  >
-                    <!-- <v-progress-circular
-                      indeterminate
-                      color="grey lighten-5"
-                    ></v-progress-circular> -->
-                    <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_kJNwM4.json"  background="#ddd" speed="1" loop autoplay></lottie-player>
-                  </v-row>
-                </template>
-              </v-img>
+              </v-img-lottie>
             </v-avatar>
             <v-btn 
               small
               text
               :color="$themer.color.seeded(author.slug)"
-              v-bind="author.home.charAt(0) == '/' ? {to: author.home, nuxt} : {href: author.home}"
+              v-bind="author.home.charAt(0) == '/' ? {to: author.home, nuxt: true} : {href: author.home}"
             >
               {{ author.name }}
               <v-icon right>mdi-account-circle</v-icon>
@@ -43,14 +28,14 @@
         sm="6"
         md="4"
         lg="3"
-        v-for="mCol in masonaryCols"
+        v-for="mCol in masonary()"
         :key="mCol"
       >
         <v-expand-transition
           v-for="article of articles"
           :key="article.slug"
         >
-          <PostSnapshot
+          <v-post-snapshot
             :article="article" 
             v-show="filter(article.slug, mCol)"
             class="mb-6"
@@ -62,6 +47,7 @@
 </template>
 
 <script>
+import NuxtSSRScreenSize from 'nuxt-ssr-screen-size'
 export default {
   head() {
     const title = `${this.author.name}`;
@@ -78,22 +64,18 @@ export default {
       meta
     }
   },
-  data() {
-    return {
-      masonaryCols: 4,
-    }
-  },
+  mixins: [NuxtSSRScreenSize.NuxtSSRScreenSizeMixin],
   async asyncData({ $content, params }) {
-    const authorsList = await $content('authors')
-      .sortBy('createdAt', 'asc')
+    const authors = await $content('authors')
       .without('body')
+      .sortBy('createdAt', 'asc')
       .where({ name: { $containsAny: params.author } })
       .fetch()
-    const author = authorsList[0] || {}
+    const author = authors[0] || {}
     const articles = await $content('articles', params.slug)
-      .where({ authors: { $containsAny: params.author } })
       .without('body')
       .sortBy('createdAt', 'asc')
+      .where({ authors: { $containsAny: params.author } })
       .fetch()
     return {
       articles,
@@ -102,8 +84,12 @@ export default {
   },
   methods: {
     filter(slug, col) {
-      return this.$themer.masonary.filter(slug, col, this.articles, this.masonaryCols)
+      return this.$themer.masonary.filter(slug, col, this.articles, this.masonary())
+    },
+    masonary() {
+      return this.$themer.masonary.cols(this.$vssWidth);
     }
-  }
+  },
+  layout: 'blog'
 }
 </script>

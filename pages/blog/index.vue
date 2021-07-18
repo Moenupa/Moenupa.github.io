@@ -39,14 +39,14 @@
         sm="6"
         md="4"
         lg="3"
-        v-for="mCol in masonaryCols"
+        v-for="mCol in masonary()"
         :key="mCol"
       >
         <v-expand-transition
           v-for="article of articles"
           :key="article.slug"
         >
-          <PostSnapshot
+          <v-post-snapshot
             :article="article" 
             v-show="filter(article.slug, mCol)"
             class="mb-6"
@@ -83,6 +83,7 @@
 </template>
 
 <script>
+import NuxtSSRScreenSize from 'nuxt-ssr-screen-size'
 export default {
   head: {
     title: "Blog",
@@ -100,42 +101,38 @@ export default {
       filtering: false,
       filters: [],
       chunks: [],
-      masonaryCols: 0,
       snackbar: false,
       loading: true,
       tagFilter: (article) => {return this.filters.every(val => article.tags.includes(this.tags[val].name));}
     }
   },
+  mixins: [NuxtSSRScreenSize.NuxtSSRScreenSizeMixin],
   methods: {
     filter(slug, col) {
-      return this.$themer.masonary.filter(slug, col, this.chunks, this.masonaryCols)
+      return this.$themer.masonary.filter(slug, col, this.chunks, this.masonary())
     },
     onLoad() {
       setTimeout(() => {this.filtering = true; window.scrollTo({ top: 0, behavior: 'smooth' });}, 0);
       setTimeout(() => this.chunks = this.articles.filter(this.tagFilter), 100);
       setTimeout(() => this.filtering = false, 400);
     },
-    onResize() {
-      this.windowSize = [window.innerHeight, window.innerWidth];
-      this.masonaryCols = this.$themer.masonary.cols(this.windowSize[1])
-    },
     onScroll() {
       this.snackbar = !this.loading;
+    },
+    masonary() {
+      return this.$themer.masonary.cols(this.$vssWidth);
     }
   },
   mounted() {
     setTimeout(() => this.chunks = this.articles.filter(this.tagFilter), 50);
-    this.onResize();
     this.$nextTick(() => {
       window.addEventListener('scroll', this.onScroll);
-      window.addEventListener('resize', this.onResize);
     })
   },
   created() {
-    setTimeout(() => this.loading = false, 2500);
+    setTimeout(() => this.loading = false, 2000);
   },
   beforeDestroy() { 
-    window.removeEventListener('resize', this.onResize);
     window.removeEventListener('scroll', this.onScroll);
   },
   async asyncData({ $content, params }) {
@@ -151,6 +148,6 @@ export default {
       articles,
       tags
     }
-  }
+  },
 }
 </script>

@@ -1,25 +1,9 @@
 <template>
   <v-card>
-    <v-img
-      height="250"
-      :lazy-src="$themer.gallery.loading"
-      :src="$themer.gallery.get(article.img, article.slug)"
+    <v-img-lottie
+      :img="{ src: article.img, slug: article.slug, type: 0 }"
     >
-      <template v-slot:placeholder>
-        <v-row
-          class="fill-height ma-0"
-          align="center"
-          justify="center"
-        >
-          <!-- <v-progress-circular
-            indeterminate
-            color="grey lighten-5"
-          ></v-progress-circular> -->
-          <lottie-player src="https://assets3.lottiefiles.com/private_files/lf30_czmjkzqg.json"  background="transparent" speed="1" loop autoplay></lottie-player>
-        </v-row>
-      </template>
-    </v-img>
-    
+    </v-img-lottie>
     <v-card-title v-if="article.title">
       {{ article.title }}
       <v-btn

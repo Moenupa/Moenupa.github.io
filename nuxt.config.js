@@ -36,8 +36,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { src: "~/plugins/themer" }
-    //{ src: "~/plugins/lottie" },
+    { src: "~/plugins/themer" },
+    { src: "~/plugins/utils" }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

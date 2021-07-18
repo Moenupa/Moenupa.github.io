@@ -5,25 +5,10 @@
         <v-card>
           <v-card-subtitle>
             <v-avatar>
-              <v-img
-                :lazy-src="$themer.gallery.loading"
-                :src="$themer.gallery.get(tag.img, tag.slug)"
-                :alt="tag.slug"
+              <v-img-lottie
+                :img="{ src: tag.img, slug: tag.slug, type: 2, height: -1 }"
               >
-                <template v-slot:placeholder>
-                  <v-row
-                    class="fill-height ma-0"
-                    align="center"
-                    justify="center"
-                  >
-                    <!-- <v-progress-circular
-                      indeterminate
-                      color="grey lighten-5"
-                    ></v-progress-circular> -->
-                    <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_kJNwM4.json"  background="#ddd" speed="1" loop autoplay></lottie-player>
-                  </v-row>
-                </template>
-              </v-img>
+              </v-img-lottie>
             </v-avatar>
             <v-btn 
               small
@@ -42,14 +27,14 @@
         sm="6"
         md="4"
         lg="3"
-        v-for="mCol in masonaryCols"
+        v-for="mCol in masonary()"
         :key="mCol"
       >
         <v-expand-transition
           v-for="article of articles"
           :key="article.slug"
         >
-          <PostSnapshot
+          <v-post-snapshot
             :article="article" 
             v-show="filter(article.slug, mCol)"
             class="mb-6"
@@ -61,6 +46,7 @@
 </template>
 
 <script>
+import NuxtSSRScreenSize from 'nuxt-ssr-screen-size'
 export default {
   head() {
     const title = `${this.tag.name}`;
@@ -77,22 +63,18 @@ export default {
       meta
     }
   },
-  data() {
-    return {
-      masonaryCols: 4
-    }
-  },
+  mixins: [NuxtSSRScreenSize.NuxtSSRScreenSizeMixin],
   async asyncData({ $content, params }) {
     const tags = await $content('tags')
       .without('body')
       .where({ slug: { $contains: params.tag } })
       .limit(1)
       .fetch()
-    const tag = tags.length > 0 ? tags[0] : {}
+    const tag = tags[0] || {}
     const articles = await $content('articles', params.slug)
       .without('body')
-      .where({ tags: { $contains: tag.name } })
       .sortBy('createdAt', 'asc')
+      .where({ tags: { $contains: tag.name } })
       .fetch()
     return {
       articles,
@@ -101,8 +83,12 @@ export default {
   },
   methods: {
     filter(slug, col) {
-      return this.$themer.masonary.filter(slug, col, this.articles, this.masonaryCols)
+      return this.$themer.masonary.filter(slug, col, this.articles, this.masonary())
     },
-  }
+    masonary() {
+      return this.$themer.masonary.cols(this.$vssWidth);
+    }
+  },
+  layout: 'blog'
 }
 </script>
