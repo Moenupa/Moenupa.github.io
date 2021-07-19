@@ -63,9 +63,21 @@
 </template>
 
 <script>
+import { createSEOMeta } from '/utils/seo';
 export default {
-  head: {
-    title: "About"
+  head() {
+    return {
+      title: "About",
+      meta: [
+        ...createSEOMeta({
+          keywords: "contribution,information,about,acknowledge",
+          title: "About",
+          description: "Information Page of Moenupa's Website",
+          url: `${process.env.BASE_URL || 'http://localhost:3000'}${this.$route.path || ""}` || "",
+        }),
+
+      ]
+    }
   }
 }
 </script>

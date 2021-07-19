@@ -10,11 +10,7 @@
               >
               </v-img-lottie>
             </v-avatar>
-            <v-btn 
-              small
-              text
-              :color="$themer.color.seeded(tag.slug)"
-            >
+            <v-btn small text :color="$themer.color.seeded(tag.slug)">
               {{ tag.name }}
               <v-icon right>mdi-tag-text-outline</v-icon>
             </v-btn>
@@ -30,12 +26,9 @@
         v-for="mCol in masonary()"
         :key="mCol"
       >
-        <v-expand-transition
-          v-for="article of articles"
-          :key="article.slug"
-        >
+        <v-expand-transition v-for="article of articles" :key="article.slug">
           <v-post-snapshot
-            :article="article" 
+            :article="article"
             v-show="filter(article.slug, mCol)"
             class="mb-6"
           />
@@ -46,49 +39,56 @@
 </template>
 
 <script>
-import NuxtSSRScreenSize from 'nuxt-ssr-screen-size'
+import NuxtSSRScreenSize from "nuxt-ssr-screen-size";
 export default {
   head() {
-    const title = `${this.tag.name}`;
-    const titleTemplate = `Blog - Tag: %s`
-    const keywords = `${this.tag.name}, moenupa, blog, post`
-    const description = `posts about ${this.tag.name}`
-    const meta = [
-      { hid: "keywords", name: "keywords", content: keywords },
-      { hid: "description", name: "description", content: description }
-    ]
     return {
-      title,
-      titleTemplate,
-      meta
-    }
+      title: this.tag.name,
+      titleTemplate: "Blog - Tag: %s",
+      meta: [
+        ...createSEOMeta({
+          keywords: `${this.tag.name},blog,post`,
+          title: `Blog Tag: ${this.tag.name}`,
+          description: `posts about ${this.tag.name}`,
+          image: this.$themer.gallery.get({ src: this.tag.img, slug: this.tag.name }),
+          url:
+            `${process.env.BASE_URL || "http://localhost:3000"}${this.$route
+              .path || ""}` || ""
+        })
+      ]
+    };
   },
   mixins: [NuxtSSRScreenSize.NuxtSSRScreenSizeMixin],
   async asyncData({ $content, params }) {
-    const tags = await $content('tags')
-      .without('body')
+    const tags = await $content("tags")
+      .without("body")
       .where({ slug: { $contains: params.tag } })
       .limit(1)
-      .fetch()
-    const tag = tags[0] || {}
-    const articles = await $content('articles', params.slug)
-      .without('body')
-      .sortBy('createdAt', 'asc')
+      .fetch();
+    const tag = tags[0] || {};
+    const articles = await $content("articles", params.slug)
+      .without("body")
+      .sortBy("createdAt", "asc")
       .where({ tags: { $contains: tag.name } })
-      .fetch()
+      .fetch();
     return {
       articles,
       tag
-    }
+    };
   },
   methods: {
     filter(slug, col) {
-      return this.$themer.masonary.filter(slug, col, this.articles, this.masonary())
+      return this.$themer.masonary.filter(
+        slug,
+        col,
+        this.articles,
+        this.masonary()
+      );
     },
     masonary() {
       return this.$themer.masonary.cols(this.$vssWidth);
     }
   },
-  layout: 'blog'
-}
+  layout: "blog"
+};
 </script>

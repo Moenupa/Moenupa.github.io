@@ -3,7 +3,7 @@
     <v-row justify="center" align="center">
       <v-col cols="12">
         <v-expand-transition>
-          <v-img v-show="loading" :height="(windowSize[0] - 640) / 2" />
+          <v-img v-show="loading" :height="($vssHeight - 640) / 2" />
         </v-expand-transition>
         <v-card>
           <v-parallax
@@ -15,7 +15,7 @@
           >
             <v-container class="d-flex flex-column justify-center align-center">
               <div class="text-h2 mb-4">Moenupa's Blog</div>
-              <v-chip-group v-model="filters" multiple>
+              <v-chip-group v-model="filters" multiple column>
                 <v-chip label filter
                   v-for="tag of tags" :key="tag.slug"
                   :color="$themer.color.seeded(tag.slug, true)"
@@ -29,7 +29,7 @@
           </v-parallax>
         </v-card>
         <v-expand-transition>
-          <v-img v-show="loading" :height="(windowSize[0] - 640) / 2" />
+          <v-img v-show="loading" :height="($vssHeight - 640) / 2" />
         </v-expand-transition>
       </v-col>
     </v-row>
@@ -58,7 +58,7 @@
       v-model="snackbar"
       :multi-line="true"
     >
-      <v-chip-group v-model="filters" multiple>
+      <v-chip-group v-model="filters" multiple column>
         <v-chip label filter
           v-for="tag of tags" :key="tag.slug"
           :color="$themer.color.seeded(tag.slug, true)"
@@ -70,12 +70,19 @@
       </v-chip-group>
       <template v-slot:action="{ attrs }">
         <v-btn
-          color="red"
           icon
           v-bind="attrs"
           @click="snackbar = false"
         >
           <v-icon>mdi-close</v-icon>
+        </v-btn>
+        <v-btn
+          color="red"
+          icon
+          v-bind="attrs"
+          @click="snackbarpin = true; snackbar = false"
+        >
+          <v-icon>mdi-delete</v-icon>
         </v-btn>
       </template>
     </v-snackbar>
@@ -85,23 +92,27 @@
 <script>
 import NuxtSSRScreenSize from 'nuxt-ssr-screen-size'
 export default {
-  head: {
-    title: "Blog",
-    meta: [
-      { hid: "keywords", name: "keywords", content: `post, moenupa, blog` },
-      { hid: "description", name: "description", content: `posts in Moenupa's blog` }
-    ],
-    script: [
-      
-    ]
+  head() {
+    return {
+      title: "Blog",
+      meta: [
+        ...createSEOMeta({
+          keywords: "home,post,blog",
+          title: "Blog",
+          description: "Home of Moenupa's Blog",
+          image: "",
+          url: `${process.env.BASE_URL || 'http://localhost:3000'}${this.$route.path || ""}` || "",
+        }),
+      ]
+    }
   },
   data() {
     return {
-      windowSize: [],
       filtering: false,
       filters: [],
       chunks: [],
       snackbar: false,
+      snackbarpin: false,
       loading: true,
       tagFilter: (article) => {return this.filters.every(val => article.tags.includes(this.tags[val].name));}
     }
@@ -117,7 +128,8 @@ export default {
       setTimeout(() => this.filtering = false, 400);
     },
     onScroll() {
-      this.snackbar = !this.loading;
+      if (!this.snackbarpin)
+        this.snackbar = !this.loading;
     },
     masonary() {
       return this.$themer.masonary.cols(this.$vssWidth);
@@ -149,5 +161,6 @@ export default {
       tags
     }
   },
+  layout: 'blog'
 }
 </script>

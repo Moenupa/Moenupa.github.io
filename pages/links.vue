@@ -43,17 +43,20 @@
 
 <script>
 export default {
-  head: {
-    title: "Navigation Page",
-    meta: [
-      { hid: "keywords", name: "keywords", content: "Moenupa" },
-      { hid: "keywords", name: "keywords", content: "Link Navigation Roadmap" },
-      {
-        hid: "description",
-        name: "description",
-        content: "Roadmap of Moenupa's Website",
-      },
-    ],
+  head() {
+    return {
+      title: "Navigation Page",
+      meta: [
+        ...createSEOMeta({
+          keywords: "navigation,links,roadmap,sitemap",
+          title: "Navigation Page",
+          description: "Roadmap of Moenupa's Website",
+          image: "",
+          url: `${process.env.BASE_URL || 'http://localhost:3000'}${this.$route.path || ""}` || "",
+        }),
+
+      ]
+    }
   },
   data() {
     return {
@@ -97,6 +100,8 @@ export default {
         }
       ],
     };
+  },
+  mounted() {
   },
   methods: {
     isLocal(url) {

@@ -50,19 +50,21 @@
 import NuxtSSRScreenSize from 'nuxt-ssr-screen-size'
 export default {
   head() {
-    const title = `${this.author.name}`;
-    const titleTemplate = `Blog - Author: %s`
-    const keywords = `${this.author.name}, moenupa, blog, post`
-    const description = `posts by ${this.author.name}`
-    const meta = [
-      { hid: "keywords", name: "keywords", content: keywords },
-      { hid: "description", name: "description", content: description }
-    ]
     return {
-      title,
-      titleTemplate,
-      meta
-    }
+      title: this.author.name,
+      titleTemplate: "Blog - Author: %s",
+      meta: [
+        ...createSEOMeta({
+          keywords: `${this.author.name},blog,post`,
+          title: `Blog Author: ${this.author.name}`,
+          description: `posts by ${this.author.name}`,
+          image: this.$themer.gallery.get({ src: this.author.img, slug: this.author.name }),
+          url:
+            `${process.env.BASE_URL || "http://localhost:3000"}${this.$route
+              .path || ""}` || ""
+        })
+      ]
+    };
   },
   mixins: [NuxtSSRScreenSize.NuxtSSRScreenSizeMixin],
   async asyncData({ $content, params }) {

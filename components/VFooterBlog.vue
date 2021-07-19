@@ -1,6 +1,6 @@
 <template>
   <v-footer :inset="mod.inset ? true : false" :fixed="mod.fixed ? true : false">
-    <v-chip-group class="float-right">
+    <v-chip-group class="float-right" column>
       <v-chip 
         v-for="chip of chips" :key="chip.id"
         :href="`${chip.link}${chip.linkpin ? '' : $nuxt.$route.path}`"
@@ -28,17 +28,12 @@ export default {
   props: {
     mod: {
       type: Object,
-      default: null
+      default: {}
     }
   },
   data() {
     return {
       chips: [
-        // {
-        //   title: "github",
-        //   type: "static",
-        //   link: "https://moenupa.github.io",
-        // },
         {
           title: "netlify",
           type: "static",
@@ -52,8 +47,14 @@ export default {
           style: "height: 50%"
         },
         {
-          title: "edit",
-          icon: "mdi-comment-edit",
+          title: "github pages",
+          icon: "mdi-github",
+          type: "static",
+          link: "https://moenupa.github.io"
+        },
+        {
+          title: "git",
+          icon: "mdi-git",
           type: "source",
           link: "https://github.com/Moenupa/homepage/tree/master/content/articles",
           linkpin: true

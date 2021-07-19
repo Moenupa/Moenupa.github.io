@@ -1,3 +1,6 @@
+import getRoutes from './utils/route';
+import { createSEOMeta } from './utils/seo';
+
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: "server",
@@ -12,8 +15,9 @@ export default {
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { hid: "description", name: "description", content: "" },
-      { hid: "keywords", name: "keywords", content: "moenupa, homepage, blog" }
+      ...createSEOMeta({
+        title: process.env.npm_package_name || "",
+      })
     ],
     link: [
       {
@@ -35,10 +39,7 @@ export default {
   css: ["@/assets/css/main"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-    { src: "~/plugins/themer" },
-    { src: "~/plugins/utils" }
-  ],
+  plugins: [{ src: "~/plugins/themer" }, { src: "~/plugins/utils" }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -53,7 +54,8 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/content
     "@nuxt/content",
-    ["nuxt-clipboard", { autoSetContainer: true }]
+    ["nuxt-clipboard", { autoSetContainer: true }],
+    "@nuxtjs/sitemap"
   ],
 
   // Content module configuration: https://go.nuxtjs.dev/config-content
@@ -72,6 +74,14 @@ export default {
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ["~/assets/variables.scss"]
+  },
+
+  // Sitemap module configuration: https://go.nuxtjs.dev/config-sitemap
+  sitemap: {
+    hostname: process.env.BASE_URL,
+    routes() {
+      return getRoutes();
+    }
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

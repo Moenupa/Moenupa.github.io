@@ -49,9 +49,8 @@
           <v-card-text>
             <p class="text--primary">👋 Hello, there!</p>
             <p class="text--primary">
-              I am WANG Meng, a year-2 Computing student from Hong Kong PolyU. I
-              started the minor in mathematics in Oct, 2020. I am taking
-              COMP3421 (Web Application Design and Development) this semester.
+              I am WANG Meng, a year-3 Computing student from Hong Kong PolyU. I
+              started a minor in mathematics in Oct, 2020. 
             </p>
           </v-card-text>
           <v-divider></v-divider>
@@ -169,17 +168,19 @@ pre {
 
 <script>
 export default {
-  head: {
-    title: "Homepage",
-    meta: [
-      { hid: "keywords", name: "keywords", content: "Moenupa" },
-      { hid: "keywords", name: "keywords", content: "Homepage" },
-      {
-        hid: "description",
-        name: "description",
-        content: "Moenupa's Personal Homepage"
-      }
-    ]
+  head() {
+    return {
+      title: "Homepage",
+      meta: [
+        ...createSEOMeta({
+          keywords: "home,homepage",
+          title: "Homepage",
+          description: "Moenupa's Homepage",
+          image: "",
+          url: `${process.env.BASE_URL || 'http://localhost:3000'}${this.$route.path || ""}` || "",
+        }),
+      ]
+    }
   },
   data() {
     return {

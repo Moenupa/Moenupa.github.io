@@ -14,7 +14,7 @@
       ><v-icon>mdi-open-in-new</v-icon></v-btn>
     </v-card-title>
     <v-card-subtitle v-if="article.authors">
-      by {{ article.authors.join(', ') }}
+      by {{ article.authors.toString() }}
     </v-card-subtitle>
     <v-card-text v-if="article.description">
       {{ article.description }}
