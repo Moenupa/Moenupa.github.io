@@ -1,21 +1,24 @@
 <template>
   <v-footer :inset="mod.inset ? true : false" :fixed="mod.fixed ? true : false">
     <v-chip-group class="float-right" column>
-      <v-chip 
-        v-for="chip of chips" :key="chip.id"
+      <v-chip
+        v-for="chip of chips"
+        :key="chip.id"
         :href="`${chip.link}${chip.linkpin ? '' : $nuxt.$route.path}`"
       >
-        <v-icon v-if="chip.icon">
-          {{ chip.icon }} 
+        <v-icon v-if="chip.icon" :color="`${chip.color}${$themer.color.adjust()}`">
+          {{ chip.icon }}
         </v-icon>
         <span v-if="chip.icon" class="text-button pl-2">
           {{ chip.title }}
         </span>
         <img
           v-else
-          :src="`/img/${chip.title}-${$vuetify.theme.dark ? 'dark' : 'light'}.svg`"
+          :src="
+            `/img/${chip.title}-${$vuetify.theme.dark ? 'dark' : 'light'}.svg`
+          "
           :style="`${chip.style ? chip.style : 'height: 60%'}; width: auto`"
-        >
+        />
         <v-divider vertical class="mx-2"></v-divider>
         <span v-if="chip.type" class="text-button">{{ chip.type }}</span>
       </v-chip>
@@ -49,18 +52,21 @@ export default {
         {
           title: "github pages",
           icon: "mdi-github",
+          color: "purple",
           type: "static",
           link: "https://moenupa.github.io"
         },
         {
           title: "git",
           icon: "mdi-git",
+          color: "green",
           type: "source",
-          link: "https://github.com/Moenupa/homepage/tree/master/content/articles",
+          link:
+            "https://github.com/Moenupa/homepage/tree/master/content/articles",
           linkpin: true
         }
       ]
-    }
+    };
   }
-}
+};
 </script>

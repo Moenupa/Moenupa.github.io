@@ -167,6 +167,7 @@ pre {
 </style>
 
 <script>
+import { createSEOMeta } from '/utils/seo';
 export default {
   head() {
     return {

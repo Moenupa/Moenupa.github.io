@@ -91,6 +91,7 @@
 
 <script>
 import NuxtSSRScreenSize from 'nuxt-ssr-screen-size'
+import { createSEOMeta } from '/utils/seo';
 export default {
   head() {
     return {

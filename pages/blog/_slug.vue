@@ -156,6 +156,7 @@
 </template>
 <script>
 import Prism from "~/plugins/prism";
+import { createSEOMeta } from '/utils/seo';
 export default {
   head() {
     return {
