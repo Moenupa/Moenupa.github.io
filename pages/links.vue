@@ -42,13 +42,12 @@
 </style>
 
 <script>
-import { createSEOMeta } from '/utils/seo';
 export default {
   head() {
     return {
       title: "Navigation Page",
       meta: [
-        ...createSEOMeta({
+        ...this.$utils.meta.get({
           keywords: "navigation,links,roadmap,sitemap",
           title: "Navigation Page",
           description: "Roadmap of Moenupa's Website",

@@ -91,13 +91,12 @@
 
 <script>
 import NuxtSSRScreenSize from 'nuxt-ssr-screen-size'
-import { createSEOMeta } from '/utils/seo';
 export default {
   head() {
     return {
       title: "Blog",
       meta: [
-        ...createSEOMeta({
+        ...this.$utils.meta.get({
           keywords: "home,post,blog",
           title: "Blog",
           description: "Home of Moenupa's Blog",

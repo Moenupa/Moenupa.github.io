@@ -63,13 +63,12 @@
 </template>
 
 <script>
-import { createSEOMeta } from '/utils/seo';
 export default {
   head() {
     return {
       title: "About",
       meta: [
-        ...createSEOMeta({
+        ...this.$utils.meta.get({
           keywords: "contribution,information,about,acknowledge",
           title: "About",
           description: "Information Page of Moenupa's Website",

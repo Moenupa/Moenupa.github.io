@@ -156,14 +156,13 @@
 </template>
 <script>
 import Prism from "~/plugins/prism";
-import { createSEOMeta } from '/utils/seo';
 export default {
   head() {
     return {
       title: this.article.title,
       titleTemplate: `Post - %s`,
       meta: [
-        ...createSEOMeta({
+        ...this.$utils.meta.get({
           keywords: this.article.tags.toString(),
           title: `Post: ${this.article.title}`,
           description: this.article.description,

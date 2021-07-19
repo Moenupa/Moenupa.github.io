@@ -167,13 +167,12 @@ pre {
 </style>
 
 <script>
-import { createSEOMeta } from '/utils/seo';
 export default {
   head() {
     return {
       title: "Homepage",
       meta: [
-        ...createSEOMeta({
+        ...this.$utils.meta.get({
           keywords: "home,homepage",
           title: "Homepage",
           description: "Moenupa's Homepage",
