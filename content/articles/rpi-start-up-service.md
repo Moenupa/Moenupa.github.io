@@ -8,6 +8,8 @@ authors:
   - dependabot
 tags: 
   - raspberry pi
+categories:
+  - linux
 ---
 
 # Create Start-up Service on RPi

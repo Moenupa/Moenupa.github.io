@@ -10,6 +10,8 @@ tags:
   - javascript
   - web development
   - todo
+categories:
+  - extras
 ---
 ## Meta
 

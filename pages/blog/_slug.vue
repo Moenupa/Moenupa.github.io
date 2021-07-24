@@ -21,7 +21,7 @@
         >
           <v-list-item-icon>
             <v-icon
-              :color="$themer.color.hierarchical(2 * heading.depth - 3)"
+              :color="$themer.color.indexed(2 * heading.depth - 3)"
               v-if="heading.depth <= 6 && heading.depth >= 2"
             >
               {{ "mdi-format-header-" + heading.depth }}
@@ -56,12 +56,30 @@
                 }"
               >
               </v-img-lottie>
-              <v-card-title class="text-h3 px-sm-4 px-md-8 px-lg-16">{{
+              <v-card-title class="text-h3 px-sm-4 px-md-8 px-lg-16 mt-2">{{
                 article.title
               }}</v-card-title>
-              <v-card-subtitle class="text-h6 px-sm-4 px-md-8 px-lg-16">
-                {{ article.description }}
+              <v-card-subtitle class="text-h6 px-sm-4 px-md-8 px-lg-16 pt-1">
+                {{ article.description }}<br>
               </v-card-subtitle>
+              <v-card-actions class="px-sm-4 px-md-8 px-lg-16">
+                <v-btn
+                  v-for="(category, id) in article.categories"
+                  :key="id"
+                  :to="
+                    categories[category]
+                      ? `/blog/category/${categories[category].slug}`
+                      : `/blog`
+                  "
+                  :color="$themer.color.seeded(category)"
+                  text
+                  nuxt
+                  small
+                >
+                  <v-icon left>mdi-archive</v-icon>
+                  {{ category }}
+                </v-btn>
+              </v-card-actions>
               <v-card-actions class="px-sm-4 px-md-8 px-lg-16">
                 <v-row>
                   <v-col cols="4">
@@ -163,7 +181,7 @@ export default {
       titleTemplate: `Post - %s`,
       meta: [
         ...this.$utils.meta.get({
-          keywords: this.article.tags.toString(),
+          keywords: this.article.tags ? this.article.tags.toString() : "",
           title: `Post: ${this.article.title}`,
           description: this.article.description,
           image: this.article.img,
@@ -171,7 +189,7 @@ export default {
             `${process.env.BASE_URL || "http://localhost:3000"}${this.$route
               .path || ""}` || "",
           type: "article",
-          author: this.article.author.toString()
+          author: this.article.author ? this.article.author.toString() : ""
         }),
         {
           hid: "article:published_time",
@@ -218,6 +236,15 @@ export default {
   },
   async asyncData({ $content, params }) {
     const article = await $content("articles", params.slug).fetch();
+    const categoriesList = await $content("categories")
+      .sortBy("createdAt", "asc")
+      .only(["name", "img", "slug"])
+      .where({ name: { $containsAny: article.categories } })
+      .fetch();
+    const categories = Object.assign(
+      {},
+      ...categoriesList.map(s => ({ [s.name]: s }))
+    );
     const tagsList = await $content("tags")
       .only(["name", "slug"])
       .where({ name: { $containsAny: article.tags } })
@@ -234,6 +261,7 @@ export default {
     );
     return {
       article,
+      categories,
       tags,
       authors
     };
