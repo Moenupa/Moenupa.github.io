@@ -16,7 +16,7 @@
     "nuxt": "2.15.7",
     "nuxt-clipboard": "0.0.6",
     "nuxt-ssr-screen-size": "^1.0.0",
-    "prism-themes": "^1.7.0",
+    "prism-themes": "^1.8.0",
     "rehype-mathjax": "^3.1.0",
     "remark-gfm": "^1.0.0",
     "remark-github": "^10.1.0",
