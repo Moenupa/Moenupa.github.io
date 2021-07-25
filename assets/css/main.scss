@@ -1,19 +1,20 @@
-@import '~vuetify/src/styles/settings/_index';
+@import "~vuetify/src/styles/settings/_index";
 
 *::-webkit-scrollbar {
-  width: .4rem;
-  height: .2rem;
+  width: 0.4rem;
+  height: 0.2rem;
   transition: width 0.3s;
 }
 *::-webkit-scrollbar-track {
   background: transparent;
 }
 *::-webkit-scrollbar-thumb {
-  background-color: rgba(144,144,144,.5);
-  border-radius: .2rem;
+  background-color: rgba(144, 144, 144, 0.5);
+  border-radius: 0.2rem;
 }
 
-body::-webkit-scrollbar, nav *::-webkit-scrollbar {
+body::-webkit-scrollbar,
+nav *::-webkit-scrollbar {
   display: none;
 }
 nav:hover *::-webkit-scrollbar {
@@ -21,7 +22,9 @@ nav:hover *::-webkit-scrollbar {
 }
 
 #post {
-  a:before, a:after, .hint:before {
+  a:before,
+  a:after,
+  .hint:before {
     display: inline-block;
     font: normal normal normal 24px/1 "Material Design Icons";
     font-size: inherit;
@@ -44,10 +47,14 @@ nav:hover *::-webkit-scrollbar {
   img {
     max-width: 100%;
   }
-  pre, img, blockquote, .hint {
+  pre,
+  img,
+  blockquote,
+  .hint {
     border-radius: 4px !important;
   }
-  pre code, pre code * {
+  pre code,
+  pre code * {
     background: transparent !important;
     padding-left: 0;
     font-size: 100% !important;
@@ -61,30 +68,33 @@ nav:hover *::-webkit-scrollbar {
     display: block;
     overflow-x: auto;
     white-space: nowrap;
-    th:not(:first-child), td:not(:first-child) {
+    th:not(:first-child),
+    td:not(:first-child) {
       padding-left: 10px;
     }
-    th:not(:last-child), td:not(:last-child) {
+    th:not(:last-child),
+    td:not(:last-child) {
       padding-right: 10px;
     }
   }
   table {
-    width: 100%
+    width: 100%;
   }
   li p {
     margin-top: 2px;
     margin-bottom: 2px;
   }
-  .toolbar-item{
+  .toolbar-item {
     margin-right: 4px;
   }
-  blockquote, .hint {
+  blockquote,
+  .hint {
     padding: 8px 16px;
     background: #99999933;
     margin-top: 8px;
     margin-bottom: 8px;
-    box-shadow: 2px 0px 0px inset map-get($green, 'base'),
-                -2px 0px 0px inset map-get($green, 'base');
+    box-shadow: 2px 0px 0px inset map-get($green, "base"),
+      -2px 0px 0px inset map-get($green, "base");
     *:first-child {
       margin-top: 0;
     }
@@ -99,17 +109,17 @@ nav:hover *::-webkit-scrollbar {
 
 $headerstyles: (
   "h1": 400 3rem normal "red",
-  "h2": 400 2.125rem -.0073529412em "pink",
+  "h2": 400 2.125rem -0.0073529412em "pink",
   "h3": 400 1.5rem normal "blue",
-  "h4": 500 1.25rem -.0125em "teal",
-  "h5": 400 1.25rem -.0125em "lime",
-  "h6": 300 1.25rem -.0125em "orange",
-  "p": 400 1rem .03125em
+  "h4": 500 1.25rem -0.0125em "teal",
+  "h5": 400 1.25rem -0.0125em "lime",
+  "h6": 300 1.25rem -0.0125em "orange",
+  "p": 400 1rem 0.03125em
 );
 $hintstyles: (
-  "tip": "\F02FC" "blue",
-  "warn": "\F0026" "orange",
-  "error": "\F015C" "red"
+  "tip": "\F02FC""blue",
+  "warn": "\F0026""orange",
+  "error": "\F015C""red"
 );
 
 #post {
@@ -118,7 +128,10 @@ $hintstyles: (
       font-weight: nth($styles, 1);
       font-size: nth($styles, 2);
       letter-spacing: nth($styles, 3);
-      @if (length($styles) > 3) { margin-top: 16px; margin-bottom: 8px; };
+      @if (length($styles) > 3) {
+        margin-top: 16px;
+        margin-bottom: 8px;
+      }
     }
   }
   @each $i, $styles in $hintstyles {
@@ -127,45 +140,57 @@ $hintstyles: (
       content: nth($styles, 1);
     }
     .hint.#{$i} {
-      box-shadow: 2px 0px 0px inset map-deep-get($colors, nth($styles, 2), 'base'),
-                  -2px 0px 0px inset map-deep-get($colors, nth($styles, 2), 'base');
+      box-shadow: 2px
+          0px
+          0px
+          inset
+          map-deep-get($colors, nth($styles, 2), "base"),
+        -2px 0px 0px inset map-deep-get($colors, nth($styles, 2), "base");
     }
   }
 }
 .theme--dark #post {
   @each $i, $styles in $headerstyles {
     #{$i} {
-      @if (length($styles) > 3) { color: map-deep-get($colors, nth($styles, 4), 'base'); };
+      @if (length($styles) > 3) {
+        color: map-deep-get($colors, nth($styles, 4), "base");
+      }
     }
   }
   @each $i, $styles in $hintstyles {
     .hint.#{$i}:before {
-      color: map-deep-get($colors, nth($styles, 2), 'lighten-2');
+      color: map-deep-get($colors, nth($styles, 2), "lighten-2");
     }
     .hint.#{$i} {
-      background: rgba(map-deep-get($colors, nth($styles, 2), 'darken-4'), .3) !important;
+      background: rgba(
+        map-deep-get($colors, nth($styles, 2), "darken-4"),
+        0.3
+      ) !important;
     }
   }
   blockquote {
-    background: rgba(map-get($green, 'darken-4'), .3) !important;
+    background: rgba(map-get($green, "darken-4"), 0.3) !important;
   }
   em {
-    color: map-get($yellow, 'lighten-3');
+    color: map-get($yellow, "lighten-3");
   }
   strong {
-    color: map-get($red, 'lighten-3');
+    color: map-get($red, "lighten-3");
   }
 }
 .theme--light #post {
   @each $i, $styles in $hintstyles {
     .hint.#{$i}:before {
-      color: map-deep-get($colors, nth($styles, 2), 'darken-2');
+      color: map-deep-get($colors, nth($styles, 2), "darken-2");
     }
     .hint.#{$i} {
-      background: rgba(map-deep-get($colors, nth($styles, 2), 'lighten-4'), .5) !important;
+      background: rgba(
+        map-deep-get($colors, nth($styles, 2), "lighten-4"),
+        0.5
+      ) !important;
     }
   }
   blockquote {
-    background: rgba(map-get($green, 'lighten-4'), .5) !important;
+    background: rgba(map-get($green, "lighten-4"), 0.5) !important;
   }
 }

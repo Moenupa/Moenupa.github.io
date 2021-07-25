@@ -3,8 +3,8 @@ export default ({ app }, inject) => {
     name: "utils",
     date: {
       format(date) {
-        const options = { year: 'numeric', month: 'long', day: 'numeric' }
-        return new Date(date).toLocaleDateString('en', options)
+        const options = { year: "numeric", month: "long", day: "numeric" };
+        return new Date(date).toLocaleDateString("en", options);
       }
     },
     meta: {
@@ -31,7 +31,11 @@ export default ({ app }, inject) => {
               "meng wang"
             ].toString()
           },
-          { hid: "description", name: "description", content: data.description || "" },
+          {
+            hid: "description",
+            name: "description",
+            content: data.description || ""
+          },
           {
             hid: "og:title",
             property: "og:title",

@@ -1,18 +1,18 @@
 ---
 title: ToDo List
 description: To do list of this blog
-img: 
+img: none
 alt: my first blog post
-authors: 
+authors:
   - moenupa
-tags: 
+tags:
   - nuxtjs
   - javascript
-  - web development
   - todo
 categories:
   - extras
 ---
+
 ## Meta
 
 Canonical meta
@@ -29,28 +29,28 @@ Create a loadContent.js script in your folder
 
 ```js
 const fetch = require("node-fetch");
-const fs = require('fs');
+const fs = require("fs");
 
-console.log('>>> Loading External Content')
+console.log(">>> Loading External Content");
 
-let url = 'https://your-url/api/content'
-let path = './content/testfile.js'
+let url = "https://your-url/api/content";
+let path = "./content/testfile.js";
 
-const downloadFile = (async (url, path) => {
+const downloadFile = async (url, path) => {
   const res = await fetch(url);
   const fileStream = fs.createWriteStream(path);
   await new Promise((resolve, reject) => {
     res.body.pipe(fileStream);
-    res.body.on("error", (err) => {
+    res.body.on("error", err => {
       reject(err);
     });
     fileStream.on("finish", function() {
       resolve();
     });
   });
-});
+};
 
-downloadFile(url,path)
+downloadFile(url, path);
 ```
 
 In package.json create a script:

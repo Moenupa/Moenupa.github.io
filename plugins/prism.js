@@ -9,8 +9,8 @@ import "prismjs/plugins/line-numbers/prism-line-numbers";
 import "prismjs/plugins/line-numbers/prism-line-numbers.css";
 
 // Include the autolinker plugin: (optional)
-import 'prismjs/plugins/autolinker/prism-autolinker'
-import 'prismjs/plugins/autolinker/prism-autolinker.css'
+import "prismjs/plugins/autolinker/prism-autolinker";
+import "prismjs/plugins/autolinker/prism-autolinker.css";
 
 // Include the line highlight plugin: (optional)
 import "prismjs/plugins/line-highlight/prism-line-highlight";

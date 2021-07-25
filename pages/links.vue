@@ -17,7 +17,11 @@
 
           <v-card-actions>
             <v-btn
-              v-bind="isLocal(link.link) ? {to: link.link, nuxt: true} : {href: link.link}"
+              v-bind="
+                isLocal(link.link)
+                  ? { to: link.link, nuxt: true }
+                  : { href: link.link }
+              "
               text
               :color="$themer.color.seeded('visit')"
               >visit
@@ -38,9 +42,6 @@
   </v-container>
 </template>
 
-<style scoped>
-</style>
-
 <script>
 export default {
   head() {
@@ -52,60 +53,61 @@ export default {
           title: "Navigation Page",
           description: "Roadmap of Moenupa's Website",
           image: "",
-          url: `${process.env.BASE_URL || 'http://localhost:3000'}${this.$route.path || ""}` || "",
-        }),
-
+          url:
+            `${process.env.BASE_URL || "http://localhost:3000"}${this.$route
+              .path || ""}` || ""
+        })
       ]
-    }
+    };
   },
   data() {
     return {
       source: "https://source.unsplash.com/random/",
       links: [
         {
-          "name":"homepage",
-          "description":"My personal homepage. Contains nearly everything you'll need to know about me.",
-          "link":"/",
-          "extras":[
+          name: "homepage",
+          description:
+            "My personal homepage. Contains nearly everything you'll need to know about me.",
+          link: "/",
+          extras: [
             {
-              "icon":"mdi-github",
-              "name":"github",
-              "link":"https://github.com/Moenupa/homepage"
+              icon: "mdi-github",
+              name: "github",
+              link: "https://github.com/Moenupa/homepage"
             }
           ]
         },
         {
-          "name":"about",
-          "description":"Page for information and acknowledgement.",
-          "link":"/about",
-          "extras":[
+          name: "about",
+          description: "Page for information and acknowledgement.",
+          link: "/about",
+          extras: [
             {
-              "icon":"mdi-github",
-              "name":"source",
-              "link":"https://github.com/Moenupa/homepage"
+              icon: "mdi-github",
+              name: "source",
+              link: "https://github.com/Moenupa/homepage"
             }
           ]
         },
         {
-          "name":"blog",
-          "description":"A blog of my own study record. [in development]",
-          "link":"/blog",
-          "extras":[
+          name: "blog",
+          description: "A blog of my own study record. [in development]",
+          link: "/blog",
+          extras: [
             {
-              "icon":"mdi-github",
-              "name":"source",
-              "link":"https://github.com/Moenupa/homepage/tree/master/content"
+              icon: "mdi-github",
+              name: "source",
+              link: "https://github.com/Moenupa/homepage/tree/master/content"
             }
           ]
         }
-      ],
+      ]
     };
   },
-  mounted() {
-  },
+  mounted() {},
   methods: {
     isLocal(url) {
-      return url.charAt(0) == '/';
+      return url.charAt(0) == "/";
     }
   }
 };

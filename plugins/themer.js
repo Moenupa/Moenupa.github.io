@@ -55,11 +55,11 @@ export default ({ $vuetify }, inject) => {
     darkmode: {
       // darkmode pin, if true, prevent auto-adjusting
       pin: false,
-      // dark query
-      query: window.matchMedia("(prefers-color-scheme: dark)"),
+      //
+      preference: "(prefers-color-scheme: dark)",
       // enable auto-adjustment for darkmode
       init() {
-        this.query.addEventListener("change", e => {
+        window.matchMedia(this.preference).addEventListener("change", e => {
           this.auto(e.matches);
           this.pin = this.pin ? false : this.pin;
         });
@@ -68,7 +68,8 @@ export default ({ $vuetify }, inject) => {
       // manual toggler of darkmode's auto-adjustment
       auto() {
         // if is pinned, prevent changing
-        if (!this.pin) $vuetify.theme.dark = this.query.matches;
+        if (!this.pin)
+          $vuetify.theme.dark = window.matchMedia(this.preference).matches;
       },
       // manual toggler of darkmode
       switch() {

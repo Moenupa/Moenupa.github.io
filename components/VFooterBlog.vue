@@ -6,7 +6,10 @@
         :key="chip.id"
         :href="`${chip.link}${chip.linkpin ? '' : $nuxt.$route.path}`"
       >
-        <v-icon v-if="chip.icon" :color="`${chip.color}${$themer.color.adjust()}`">
+        <v-icon
+          v-if="chip.icon"
+          :color="`${chip.color}${$themer.color.adjust()}`"
+        >
           {{ chip.icon }}
         </v-icon>
         <span v-if="chip.icon" class="text-button pl-2">

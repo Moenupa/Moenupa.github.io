@@ -10,14 +10,17 @@
             :lazy-src="$themer.gallery.loading"
             src="/img/main_md.png"
             class="my-16"
-            :height="loading? '500': '300'"
+            :height="loading ? '500' : '300'"
             contain
           >
             <v-container class="d-flex flex-column justify-center align-center">
               <div class="text-h2 mb-4">Moenupa's Blog</div>
               <v-chip-group v-model="filters" multiple column>
-                <v-chip label filter
-                  v-for="tag of tags" :key="tag.slug"
+                <v-chip
+                  label
+                  filter
+                  v-for="tag of tags"
+                  :key="tag.slug"
                   :color="$themer.color.seeded(tag.slug, true)"
                   @click="onLoad"
                 >
@@ -42,25 +45,22 @@
         v-for="mCol in masonary()"
         :key="mCol"
       >
-        <v-expand-transition
-          v-for="article of articles"
-          :key="article.slug"
-        >
+        <v-expand-transition v-for="article of articles" :key="article.slug">
           <v-post-snapshot
-            :article="article" 
+            :article="article"
             v-show="filter(article.slug, mCol)"
             class="mb-6"
           />
         </v-expand-transition>
       </v-col>
     </v-row>
-    <v-snackbar
-      v-model="snackbar"
-      :multi-line="true"
-    >
+    <v-snackbar v-model="snackbar" :multi-line="true">
       <v-chip-group v-model="filters" multiple column>
-        <v-chip label filter
-          v-for="tag of tags" :key="tag.slug"
+        <v-chip
+          label
+          filter
+          v-for="tag of tags"
+          :key="tag.slug"
           :color="$themer.color.seeded(tag.slug, true)"
           @click="onLoad"
         >
@@ -69,18 +69,17 @@
         </v-chip>
       </v-chip-group>
       <template v-slot:action="{ attrs }">
-        <v-btn
-          icon
-          v-bind="attrs"
-          @click="snackbar = false"
-        >
+        <v-btn icon v-bind="attrs" @click="snackbar = false">
           <v-icon>mdi-close</v-icon>
         </v-btn>
         <v-btn
           color="red"
           icon
           v-bind="attrs"
-          @click="snackbarpin = true; snackbar = false"
+          @click="
+            snackbarpin = true;
+            snackbar = false;
+          "
         >
           <v-icon>mdi-delete</v-icon>
         </v-btn>
@@ -90,7 +89,7 @@
 </template>
 
 <script>
-import NuxtSSRScreenSize from 'nuxt-ssr-screen-size'
+import NuxtSSRScreenSize from "nuxt-ssr-screen-size";
 export default {
   head() {
     return {
@@ -101,10 +100,12 @@ export default {
           title: "Blog",
           description: "Home of Moenupa's Blog",
           image: "",
-          url: `${process.env.BASE_URL || 'http://localhost:3000'}${this.$route.path || ""}` || "",
-        }),
+          url:
+            `${process.env.BASE_URL || "http://localhost:3000"}${this.$route
+              .path || ""}` || ""
+        })
       ]
-    }
+    };
   },
   data() {
     return {
@@ -114,53 +115,67 @@ export default {
       snackbar: false,
       snackbarpin: false,
       loading: true,
-      tagFilter: (article) => {return this.filters.every(val => article.tags.includes(this.tags[val].name));}
-    }
+      tagFilter: article => {
+        return this.filters.every(val =>
+          article.tags.includes(this.tags[val].name)
+        );
+      }
+    };
   },
   mixins: [NuxtSSRScreenSize.NuxtSSRScreenSizeMixin],
   methods: {
     filter(slug, col) {
-      return this.$themer.masonary.filter(slug, col, this.chunks, this.masonary())
+      return this.$themer.masonary.filter(
+        slug,
+        col,
+        this.chunks,
+        this.masonary()
+      );
     },
     onLoad() {
-      setTimeout(() => {this.filtering = true; window.scrollTo({ top: 0, behavior: 'smooth' });}, 0);
-      setTimeout(() => this.chunks = this.articles.filter(this.tagFilter), 100);
-      setTimeout(() => this.filtering = false, 400);
+      setTimeout(() => {
+        this.filtering = true;
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, 0);
+      setTimeout(
+        () => (this.chunks = this.articles.filter(this.tagFilter)),
+        100
+      );
+      setTimeout(() => (this.filtering = false), 400);
     },
     onScroll() {
-      if (!this.snackbarpin)
-        this.snackbar = !this.loading;
+      if (!this.snackbarpin) this.snackbar = !this.loading;
     },
     masonary() {
       return this.$themer.masonary.cols(this.$vssWidth);
     }
   },
   mounted() {
-    setTimeout(() => this.chunks = this.articles.filter(this.tagFilter), 50);
+    setTimeout(() => (this.chunks = this.articles.filter(this.tagFilter)), 50);
     this.$nextTick(() => {
-      window.addEventListener('scroll', this.onScroll);
-    })
+      window.addEventListener("scroll", this.onScroll);
+    });
   },
   created() {
-    setTimeout(() => this.loading = false, 2000);
+    setTimeout(() => (this.loading = false), 2000);
   },
-  beforeDestroy() { 
-    window.removeEventListener('scroll', this.onScroll);
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.onScroll);
   },
   async asyncData({ $content, params }) {
-    const articles = await $content('articles', params.slug)
-      .only(['title', 'description', 'img', 'slug', 'authors', 'tags'])
-      .sortBy('createdAt', 'desc')
-      .fetch()
-    const tags = await $content('tags', params.slug)
-      .only(['name', 'description', 'img', 'slug'])
-      .sortBy('createdAt', 'asc')
-      .fetch()
+    const articles = await $content("articles", params.slug)
+      .only(["title", "description", "img", "slug", "authors", "tags"])
+      .sortBy("createdAt", "desc")
+      .fetch();
+    const tags = await $content("tags", params.slug)
+      .only(["name", "description", "img", "slug"])
+      .sortBy("createdAt", "asc")
+      .fetch();
     return {
       articles,
       tags
-    }
+    };
   },
-  layout: 'blog'
-}
+  layout: "blog"
+};
 </script>

@@ -6,19 +6,20 @@
           <v-card-subtitle>
             <v-avatar>
               <v-img-lottie
-                :img="{ src: category.img, slug: category.slug, type: 1, height: -1 }"
+                :img="{
+                  src: category.img,
+                  slug: category.slug,
+                  type: 1,
+                  height: -1
+                }"
               >
               </v-img-lottie>
             </v-avatar>
-            <v-btn 
-              small
-              text
-              :color="$themer.color.seeded(category.slug)"
-            >
+            <v-btn small text :color="$themer.color.seeded(category.slug)">
               {{ category.name }}
               <v-icon right>mdi-account-circle</v-icon>
             </v-btn>
-            {{ category.bio }}
+            {{ category.description }}
           </v-card-subtitle>
         </v-card>
       </v-col>
@@ -30,12 +31,9 @@
         v-for="mCol in masonary()"
         :key="mCol"
       >
-        <v-expand-transition
-          v-for="article of articles"
-          :key="article.slug"
-        >
+        <v-expand-transition v-for="article of articles" :key="article.slug">
           <v-post-snapshot
-            :article="article" 
+            :article="article"
             v-show="filter(article.slug, mCol)"
             class="mb-6"
           />
@@ -46,7 +44,7 @@
 </template>
 
 <script>
-import NuxtSSRScreenSize from 'nuxt-ssr-screen-size'
+import NuxtSSRScreenSize from "nuxt-ssr-screen-size";
 export default {
   head() {
     return {
@@ -57,7 +55,10 @@ export default {
           keywords: `${this.category.name},blog,post`,
           title: `Blog Category: ${this.category.name}`,
           description: `posts by ${this.category.name}`,
-          image: this.$themer.gallery.get({ src: this.category.img, slug: this.category.name }),
+          image: this.$themer.gallery.get({
+            src: this.category.img,
+            slug: this.category.name
+          }),
           url:
             `${process.env.BASE_URL || "http://localhost:3000"}${this.$route
               .path || ""}` || ""
@@ -67,30 +68,35 @@ export default {
   },
   mixins: [NuxtSSRScreenSize.NuxtSSRScreenSizeMixin],
   async asyncData({ $content, params }) {
-    const categories = await $content('categories')
-      .without('body')
-      .sortBy('createdAt', 'asc')
-      .where({ name: { $containsAny: params.category } })
-      .fetch()
-    const category = categories[0] || {}
-    const articles = await $content('articles', params.slug)
-      .without('body')
-      .sortBy('createdAt', 'asc')
-      .where({ authors: { $containsAny: params.author } })
-      .fetch()
+    const categories = await $content("categories")
+      .without("body")
+      .where({ slug: { $containsAny: params.category } })
+      .limit(1)
+      .fetch();
+    const category = categories[0] || {};
+    const articles = await $content("articles", params.slug)
+      .without("body")
+      .sortBy("createdAt", "asc")
+      .where({ categories: { $containsAny: category.name } })
+      .fetch();
     return {
       articles,
       category
-    }
+    };
   },
   methods: {
     filter(slug, col) {
-      return this.$themer.masonary.filter(slug, col, this.articles, this.masonary())
+      return this.$themer.masonary.filter(
+        slug,
+        col,
+        this.articles,
+        this.masonary()
+      );
     },
     masonary() {
       return this.$themer.masonary.cols(this.$vssWidth);
     }
   },
-  layout: 'blog'
-}
+  layout: "blog"
+};
 </script>

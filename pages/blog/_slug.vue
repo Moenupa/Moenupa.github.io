@@ -60,7 +60,7 @@
                 article.title
               }}</v-card-title>
               <v-card-subtitle class="text-h6 px-sm-4 px-md-8 px-lg-16 pt-1">
-                {{ article.description }}<br>
+                {{ article.description }}<br />
               </v-card-subtitle>
               <v-card-actions class="px-sm-4 px-md-8 px-lg-16">
                 <v-btn
@@ -105,10 +105,10 @@
                       v-for="(tag, id) in article.tags"
                       :key="id"
                       :to="
-                        tags[tag].slug ? `/blog/tag/${tags[tag].slug}` : `/blog`
+                        tags[tag] ? `/blog/tag/${tags[tag].slug}` : `/blog`
                       "
                       :color="
-                        tags[tag].slug
+                        tags[tag]
                           ? $themer.color.seeded(tags[tag].slug)
                           : 'red'
                       "
@@ -118,7 +118,7 @@
                       small
                     >
                       <v-icon left>mdi-tag-text</v-icon>
-                      {{ tags[tag].name }}
+                      {{ tags[tag] ? tags[tag].name : "tag err" }}
                     </v-btn>
                   </v-col>
                 </v-row>

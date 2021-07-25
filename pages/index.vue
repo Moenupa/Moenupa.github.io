@@ -5,7 +5,7 @@
         <v-card class="pa-4 mt-4" justify="center" align="center">
           <div class="my-2">
             <v-avatar size="160">
-              <v-img id="selfie" src="/img/main.png" alt=""/>
+              <v-img id="selfie" src="/img/main.png" alt="" />
               <!-- author link: https://www.pixiv.net/users/23223750 -->
             </v-avatar>
           </div>
@@ -50,7 +50,7 @@
             <p class="text--primary">👋 Hello, there!</p>
             <p class="text--primary">
               I am WANG Meng, a year-3 Computing student from Hong Kong PolyU. I
-              started a minor in mathematics in Oct, 2020. 
+              started a minor in mathematics in Oct, 2020.
             </p>
           </v-card-text>
           <v-divider></v-divider>
@@ -177,10 +177,12 @@ export default {
           title: "Homepage",
           description: "Moenupa's Homepage",
           image: "",
-          url: `${process.env.BASE_URL || 'http://localhost:3000'}${this.$route.path || ""}` || "",
-        }),
+          url:
+            `${process.env.BASE_URL || "http://localhost:3000"}${this.$route
+              .path || ""}` || ""
+        })
       ]
-    }
+    };
   },
   data() {
     return {
@@ -230,6 +232,6 @@ export default {
     }
   },
   mounted() {},
-  layout: 'fill'
+  layout: "fill"
 };
 </script>

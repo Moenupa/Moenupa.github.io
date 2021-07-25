@@ -50,7 +50,10 @@ export default {
           keywords: `${this.tag.name},blog,post`,
           title: `Blog Tag: ${this.tag.name}`,
           description: `posts about ${this.tag.name}`,
-          image: this.$themer.gallery.get({ src: this.tag.img, slug: this.tag.name }),
+          image: this.$themer.gallery.get({
+            src: this.tag.img,
+            slug: this.tag.name
+          }),
           url:
             `${process.env.BASE_URL || "http://localhost:3000"}${this.$route
               .path || ""}` || ""

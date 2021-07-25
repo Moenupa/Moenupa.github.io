@@ -3,10 +3,10 @@ title: Create Start-up Service on RPi
 description: Using commandline systemctl to enable a start-up service
 img: https://images.unsplash.com/photo-1588336271629-1704e27ef8be?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2158&q=80
 alt: nice image
-authors: 
+authors:
   - moenupa
   - dependabot
-tags: 
+tags:
   - raspberry pi
 categories:
   - linux
@@ -14,7 +14,7 @@ categories:
 
 # Create Start-up Service on RPi
 
-## Write Service 
+## Write Service
 
 ```shell
 $ sudo vim /etc/systemd/system/rc-local.service
@@ -46,10 +46,10 @@ $ sudo vim /etc/rc.local
 #!/bin/sh
 # /etc/rc.local
 if test -d /etc/rc.local.d; then
-	for rcscript in /etc/rc.local.d/\*.sh; do 
-		test -r "${rcscript}" && sh ${rcscript} 
-	done 
-	unset rcscript 
+	for rcscript in /etc/rc.local.d/\*.sh; do
+		test -r "${rcscript}" && sh ${rcscript}
+	done
+	unset rcscript
 fi
 ```
 
@@ -66,4 +66,5 @@ $ sudo systemctl enable rc-local.service
 THEN EVERY `sh` file UNDER `/etc/rc.local.d/` WILL AUTOSTARTUP
 
 ## Reference
+
 [https://blog.csdn.net/u014025444/article/details/90142558](https://blog.csdn.net/u014025444/article/details/90142558)
