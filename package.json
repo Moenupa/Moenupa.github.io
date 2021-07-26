@@ -22,7 +22,7 @@
     "remark-github": "^10.1.0",
     "remark-hint": "^1.0.10",
     "remark-math": "^4.0.0",
-    "sass": "1.35.2",
+    "sass": "1.36.0",
     "storyblok-nuxt": "^2.0.1",
     "webpack": "^4.46.0"
   }
