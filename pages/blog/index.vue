@@ -2,9 +2,6 @@
   <v-container>
     <v-row justify="center" align="center">
       <v-col cols="12">
-        <v-expand-transition>
-          <v-img v-show="loading" :height="($vssHeight - 640) / 2" />
-        </v-expand-transition>
         <v-card>
           <v-parallax
             :lazy-src="$themer.gallery.loading"
@@ -15,28 +12,12 @@
           >
             <v-container class="d-flex flex-column justify-center align-center">
               <div class="text-h2 mb-4">Moenupa's Blog</div>
-              <v-chip-group v-model="filters" multiple column>
-                <v-chip
-                  label
-                  filter
-                  v-for="tag of tags"
-                  :key="tag.slug"
-                  :color="$themer.color.seeded(tag.slug, true)"
-                  @click="onLoad"
-                >
-                  {{ tag.name }}
-                  <v-icon right>mdi-tag-text-outline</v-icon>
-                </v-chip>
-              </v-chip-group>
             </v-container>
           </v-parallax>
         </v-card>
-        <v-expand-transition>
-          <v-img v-show="loading" :height="($vssHeight - 640) / 2" />
-        </v-expand-transition>
       </v-col>
     </v-row>
-    <v-row justify="center" v-show="!loading">
+    <v-row justify="center">
       <v-col
         cols="12"
         sm="6"
@@ -54,37 +35,6 @@
         </v-expand-transition>
       </v-col>
     </v-row>
-    <v-snackbar v-model="snackbar" :multi-line="true">
-      <v-chip-group v-model="filters" multiple column>
-        <v-chip
-          label
-          filter
-          v-for="tag of tags"
-          :key="tag.slug"
-          :color="$themer.color.seeded(tag.slug, true)"
-          @click="onLoad"
-        >
-          {{ tag.name }}
-          <v-icon right>mdi-tag-text-outline</v-icon>
-        </v-chip>
-      </v-chip-group>
-      <template v-slot:action="{ attrs }">
-        <v-btn icon v-bind="attrs" @click="snackbar = false">
-          <v-icon>mdi-close</v-icon>
-        </v-btn>
-        <v-btn
-          color="red"
-          icon
-          v-bind="attrs"
-          @click="
-            snackbarpin = true;
-            snackbar = false;
-          "
-        >
-          <v-icon>mdi-delete</v-icon>
-        </v-btn>
-      </template>
-    </v-snackbar>
   </v-container>
 </template>
 
@@ -114,12 +64,7 @@ export default {
       chunks: [],
       snackbar: false,
       snackbarpin: false,
-      loading: true,
-      tagFilter: article => {
-        return this.filters.every(val =>
-          article.tags.includes(this.tags[val].name)
-        );
-      }
+      loading: true
     };
   },
   mixins: [NuxtSSRScreenSize.NuxtSSRScreenSizeMixin],
@@ -128,7 +73,7 @@ export default {
       return this.$themer.masonary.filter(
         slug,
         col,
-        this.chunks,
+        this.articles,
         this.masonary()
       );
     },
@@ -137,10 +82,6 @@ export default {
         this.filtering = true;
         window.scrollTo({ top: 0, behavior: "smooth" });
       }, 0);
-      setTimeout(
-        () => (this.chunks = this.articles.filter(this.tagFilter)),
-        100
-      );
       setTimeout(() => (this.filtering = false), 400);
     },
     onScroll() {
@@ -151,30 +92,19 @@ export default {
     }
   },
   mounted() {
-    setTimeout(() => (this.chunks = this.articles.filter(this.tagFilter)), 50);
     this.$nextTick(() => {
       window.addEventListener("scroll", this.onScroll);
     });
   },
-  created() {
-    setTimeout(() => (this.loading = false), 2000);
-  },
   beforeDestroy() {
     window.removeEventListener("scroll", this.onScroll);
   },
-  async asyncData({ $content, params }) {
-    const articles = await $content("articles", params.slug)
-      .only(["title", "description", "img", "slug", "authors", "tags"])
-      .sortBy("createdAt", "desc")
-      .fetch();
-    const tags = await $content("tags", params.slug)
-      .only(["name", "description", "img", "slug"])
-      .sortBy("createdAt", "asc")
-      .fetch();
-    return {
-      articles,
-      tags
-    };
+  async asyncData({ app }) {
+    const res = await app.$storyapi.get("cdn/stories", {
+      starts_with: "articles/",
+      resolve_relations: ["article.authors", "article.tags", "article.categories"]
+    });
+    return { articles: res.data.stories };
   },
   layout: "blog"
 };

@@ -64,6 +64,15 @@ export default ({ app }, inject) => {
           }
         ];
       }
+    },
+    post: {
+      wpm: 275,
+      words(text) {
+        return (text.match(/[\w\d\’\'-]+/g) || []).length;
+      },
+      estimate(text) {
+        return Math.ceil(this.words(text) / this.wpm);
+      }
     }
   };
   inject("utils", utils);

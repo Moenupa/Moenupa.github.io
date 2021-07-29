@@ -1,0 +1,48 @@
+.v-post {
+  // general tweaks
+  a {
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  // link icon settings
+  a[href^="#"]:before {
+    content: "\F069F";
+  }
+  a:not([href^="#"]):after {
+    content: "\F0339";
+  }
+  a[href^="http"]:after {
+    content: "\F03CC";
+  }
+  a[aria-hidden="true"]:before, a[aria-hidden="true"]:after, .footnote-ref a:before, a.footnote-backref:before{
+    content: "" !important;
+  }
+
+  // heading anchor
+  a.heading-anchor {
+    text-decoration: none !important;
+    text-align: center;
+    font-size: 1em;
+    margin-left: -1.3em;
+    margin-right: .3em;
+    color: inherit;
+    &:before {
+      color: inherit;
+      font-size: inherit;
+      content: "\F069F" !important;
+      visibility: hidden;
+      opacity: 0;
+      transition: all 0.2s ease-in-out
+    }
+  }
+  *:hover {
+    a.heading-anchor:before {
+      padding-left: 1em;
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}

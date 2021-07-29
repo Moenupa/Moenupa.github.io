@@ -34,7 +34,7 @@ export default {
   props: {
     mod: {
       type: Object,
-      default: {}
+      default: () => {}
     }
   },
   data() {

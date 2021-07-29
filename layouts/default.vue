@@ -1,9 +1,7 @@
 <template>
   <v-app>
     <v-main class="d-flex justify-center align-center">
-      <v-fade-transition>
-        <Nuxt />
-      </v-fade-transition>
+      <Nuxt />
       <FunctionBar />
     </v-main>
   </v-app>

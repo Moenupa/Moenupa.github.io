@@ -1,0 +1,176 @@
+@import "~vuetify/src/styles/settings/_index";
+
+.v-post {
+  li p {
+    margin-bottom: 0;
+  }
+
+  ul, ol {
+    margin-bottom: 16px;
+    ul, ol {
+      margin-bottom: -.2em;
+    }
+  }
+
+  .footnotes {
+    padding-left: 16px;
+    padding-right: 16px;
+    font-size: 90%;
+  }
+
+  li {
+    border-radius: 4px;
+    padding: .2em .5em;
+    margin-top: .2em;
+    margin-bottom: .2em;
+  }
+  li:hover {
+    transition: all .2s ease-in-out;
+    background-color: #99999911;
+  }
+
+  ol {
+    padding-left: 1.6em;
+    li::marker {
+      display: inline-block;
+      color: #99999966;
+      font-size: 1em;
+      padding: 0;
+      font-weight: bold;
+      width: 1em;
+      transition: all .2s ease-in-out;
+    }
+    li:hover::marker {
+      color: #999999cc
+    }
+  }
+
+  ul {
+    list-style: none;
+    padding-left: .2em;
+    li {
+      padding-left: 1.6em;
+      &:not(.task-list-item):before {
+        display: inline-block;
+        margin-left: -1.2em;
+        margin-right: .4em;
+        width: 1em;
+        font-size: 1em;
+        color: inherit;
+      }
+    }
+  }
+  ul.contains-task-list {
+    li.task-list-item {
+      padding-left: 1.4em;
+      input {
+        display: none;
+      }
+      input + label:before {
+        display: inline-block;
+        margin-left: -1em;
+        margin-right: .2em;
+        width: 1em;
+        font-size: 1em;
+        color: inherit;
+      }
+      input:checked + label:before {
+        display: inline-block;
+      }
+    }
+  }
+
+  // icons
+  $list: (
+    "\F0A10" "\F09DE" "\F0A13"
+  );
+  $todolist: (
+    ( "\F0131" "\F0135" ),
+    ( "\F0130" "\F0134" ),
+    ( "\F0131" "\F0856" ),
+  );
+  
+  ul {
+    li:not(.task-list-item):before {
+      content: nth($list, 1);
+    }
+    ul {
+      li:not(.task-list-item):before {
+        content: nth($list, 2);
+      }
+      ul {
+        li:not(.task-list-item):before {
+          content: nth($list, 3);
+        }
+      }
+    }
+  }
+  ul.contains-task-list {
+    li input + label:before {
+      content: nth(nth($todolist, 1), 1);
+    }
+    li input:checked + label:before {
+      content: nth(nth($todolist, 1), 2);
+    }
+    ul.contains-task-list {
+      li input + label:before {
+        content: nth(nth($todolist, 2), 1);
+      }
+      li input:checked + label:before {
+        content: nth(nth($todolist, 2), 2);
+      }
+      ul.contains-task-list {
+        li input + label:before {
+          content: nth(nth($todolist, 3), 1);
+        }
+        li input:checked + label:before {
+          content: nth(nth($todolist, 3), 2);
+        }
+      }
+    }
+  }
+
+  $accent-1: map-deep-get($colors, "red", "base");
+  $accent-2: map-deep-get($colors, "green", "base");
+
+  @keyframes spin { 
+    30% { color: $accent-1; transform: translateY(-5px) scaleY(.9); }
+    40% { color: $accent-1; transform: translateY(3px) scaleY(.9); }
+    45% { color: $accent-1; transform: translateY(-2px) scaleY(.9); }
+    48% { color: $accent-1; transform: translateY(1px); }
+    50% { color: $accent-2; transform: translateY(0px) rotate(360deg); } 
+    70% { color: $accent-2; transform: translateY(0px); }
+  }
+  @keyframes colorize { 
+    30% { color: $accent-1; }
+    45% { color: $accent-1; transform: translateX(-3px) scaleX(.9); }
+    50% { color: $accent-1; transform: translateX(3px) scaleX(.9); }
+    55% { color: $accent-2; transform: translateX(-1px) scaleX(.95); }
+    60% { color: $accent-2; transform: translateX(1px); } 
+    80% { color: $accent-2; transform: translateX(0px); }
+  }
+  @keyframes squeeze-after {  
+    75% { transform: translate(-.1em, .1em) scale(.8, .8); }
+    50% { transform: translateX(0) scaleX(1); }
+  }
+  @keyframes squeeze-before {  
+    75% { transform: translate(.1em, .1em) scale(.8, .8); }
+    50% { transform: translateX(0) scaleX(1); }
+  }
+  li:hover:before {
+    animation: spin 2s infinite ease-in-out;
+  }
+  li.task-list-item {
+    label:hover:before {
+      animation: colorize 2s infinite ease-in-out;
+    }
+  }
+  a:hover {
+    &:after {
+      animation: squeeze-after 2s infinite ease-in-out;
+    }
+    &:before {
+      animation: squeeze-before 2s infinite ease-in-out;
+    }
+  }
+}

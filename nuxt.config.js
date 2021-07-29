@@ -11,7 +11,7 @@ export default {
     },
     meta: [
       { charset: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" }
     ],
     link: [
       {
@@ -30,43 +30,36 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ["@/assets/css/main"],
+  css: [
+    "@/assets/css/main",
+    "~/node_modules/highlight.js/styles/tomorrow-night.css",
+    "~/node_modules/katex/dist/katex.min.css"
+  ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     { src: "~/plugins/themer" },
-    { src: "~/plugins/utils" }
+    { src: "~/plugins/utils" },
+    { src: "~/plugins/markdown-it" }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [
-    // https://go.nuxtjs.dev/vuetify
-    "@nuxtjs/vuetify"
-  ],
+  buildModules: [],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    // https://go.nuxtjs.dev/content
-    "@nuxt/content",
+    // https://go.nuxtjs.dev/vuetify
+    "@nuxtjs/vuetify",
     ["nuxt-clipboard", { autoSetContainer: true }],
+    [
+      "storyblok-nuxt",
+      { accessToken: process.env.STORYBLOK_KEY, cacheProvider: "memory" }
+    ]
     // "@nuxtjs/sitemap"
   ],
-
-  // Content module configuration: https://go.nuxtjs.dev/config-content
-  content: {
-    liveEdit: false,
-    markdown: {
-      prism: {
-        theme: "prism-themes/themes/prism-material-dark.css"
-      },
-      remarkPlugins: ["remark-math", "remark-gfm", "remark-hint"],
-      rehypePlugins: ["rehype-mathjax"],
-      tocDepth: 6
-    }
-  },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
@@ -89,5 +82,16 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {}
+  build: {
+    extend(config, ctx) {
+      config.module.rules.push({
+        enforce: "pre",
+        test: /\.md$/,
+        loader: "raw-loader",
+        exclude: /(node_modules)/
+      });
+    }
+  },
+
+  loading: '~/components/Loading.vue'
 };

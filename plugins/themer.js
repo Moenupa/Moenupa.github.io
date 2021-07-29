@@ -39,6 +39,7 @@ export default ({ $vuetify }, inject) => {
       },
       // get color by seed
       seeded(str, bg) {
+        if (str === null) return this.random(bg);
         return (
           this.colors[Math.abs(this.hash(str)) % this.colors.length] +
           this.adjust(bg)
@@ -48,6 +49,12 @@ export default ({ $vuetify }, inject) => {
       indexed(i, bg) {
         return (
           this.colors[this.hierarchy[Math.abs(i % this.hierarchy.length)]] +
+          this.adjust(bg)
+        );
+      },
+      random(bg) {
+        return (
+          this.colors[Math.floor(Math.random() * this.colors.length)] +
           this.adjust(bg)
         );
       }

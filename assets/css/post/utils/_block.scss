@@ -1,0 +1,163 @@
+@import "~vuetify/src/styles/settings/_index";
+
+.v-post {
+  hr {
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+    border: none;
+    border-top: 2px ridge;
+  }
+
+  // global border radius
+  blockquote,
+  div[class^="hint-"],
+  img,
+  mark,
+  pre,
+  table {
+    border-radius: .25rem !important;
+    margin-bottom: 1rem;
+  }
+
+  blockquote,
+  div[class^="hint-"] {
+    padding: .8rem 1rem;
+    background: #99999933;
+    box-shadow: 3px 0px 0px inset #999,
+                -3px 0px 0px inset #999;
+    *:first-child {
+      margin-top: 0;
+    }
+    *:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  mark {
+    padding-left: .25rem;
+    padding-right: .25rem;
+  }
+
+  pre {
+    * {
+      margin: 0 !important;
+    }
+    code {
+      padding: .8rem 1rem;
+      overflow-x: auto;
+    }
+  }
+
+  table {
+    padding-bottom: 1px;
+    border-collapse: collapse;
+
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    > *:first-child > tr:first-child {
+      th, td {
+        &:first-child {
+          border-top-left-radius: 4px;
+        }
+        &:last-child {
+          border-top-right-radius: 4px;
+        }
+      }
+    }
+    > *:last-child > tr:last-child {
+      th, td {
+        &:first-child {
+          border-bottom-left-radius: 4px;
+        }
+        &:last-child {
+          border-bottom-right-radius: 4px;
+        }
+      }
+    }
+    th, td {
+      min-width: 100px;
+      padding: 6px 12px;
+      &:not(:last-child) {
+        padding-right: 10px;
+        border-right: 1px solid #99999966;
+      }
+    }
+    th {
+      padding: 8px 12px;
+      background-color: #99999933;
+      border-bottom: 2px solid #99999999;
+    }
+    tr {
+      background-color: #99999911;
+      &:hover {
+        background-color: #99999933;
+      }
+    }
+  }
+}
+
+$hints: (
+  "warning": ("accent": "red", "icon": "\F015C"),
+  "danger": ("accent": "orange", "icon": "\F0767"),
+  "tip": ("accent": "green", "icon": "\F0416"),
+  "info": ("accent": "blue", "icon": "\F02FC")
+);
+
+.v-post {
+  @each $hint, $style in $hints {
+    $accent: map-get($style, "accent");
+    $icon: map-get($style, "icon");
+    .hint-#{$hint} {
+      display: inline-block;
+      min-width: 100%;
+      z-index: 1;
+      box-shadow: 2px 0px 0px inset map-deep-get($colors, $accent, "base"),
+      -2px 0px 0px inset map-deep-get($colors, $accent, "base") !important;
+      > * {
+        display: block;
+        position: relative;
+        z-index: 2;
+        margin-left: .2rem;
+        padding-left: 2rem;
+        &:before {
+          display: inline-block;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          width: 1.6rem;
+          text-align: center;
+          height: 100%;
+          content: "#{$icon}";
+        }
+      }
+    }
+  }
+}
+.theme--dark .v-post {
+  @each $hint, $style in $hints {
+    $accent: map-get($style, "accent");
+    .hint-#{$hint} {
+      background: rgba(map-deep-get($colors, $accent, "darken-4"), 0.3) !important;
+      > *:before {
+        color: map-deep-get($colors, $accent, "lighten-3");
+      }
+    }
+  }
+}
+.theme--light .v-post {
+  @each $hint, $style in $hints {
+    $accent: map-get($style, "accent");
+    .hint-#{$hint} {
+      background: rgba(map-deep-get($colors, $accent, "lighten-4"), 0.5) !important;
+      > *:before {
+        color: map-deep-get($colors, $accent, "darken-3");
+      }
+    }
+  }
+}

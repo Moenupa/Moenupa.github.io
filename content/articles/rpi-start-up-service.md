@@ -16,11 +16,11 @@ categories:
 
 ## Write Service
 
-```shell
+```bash
 $ sudo vim /etc/systemd/system/rc-local.service
 ```
 
-```shell
+```bash
 [Unit]
 Description="/etc/rc.local Compatibility"
 
@@ -38,11 +38,11 @@ WantedBy=multi-user.target
 
 ## Link to Shell Script
 
-```shell
+```bash
 $ sudo vim /etc/rc.local
 ```
 
-```shell
+```bash
 #!/bin/sh
 # /etc/rc.local
 if test -d /etc/rc.local.d; then
@@ -55,7 +55,7 @@ fi
 
 ## Enable the service
 
-```shell
+```bash
 $ sudo chmod a+x /etc/rc.local
 $ sudo mkdir /etc/rc.local.d
 $ sudo systemctl enable rc-local.service

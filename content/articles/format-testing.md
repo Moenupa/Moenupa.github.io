@@ -13,344 +13,272 @@ categories:
   - web development
 ---
 
-This is intended as a quick reference and showcase. For more complete info, see [John Gruber's original spec](http://daringfireball.net/projects/markdown/) and the [Github-flavored Markdown info page](http://github.github.com/github-flavored-markdown/).
+# h1 Heading 8-)
+## h2 Heading
+### h3 Heading
+#### h4 Heading
+##### h5 Heading
+###### h6 Heading
 
-This cheatsheet is specifically _Markdown Here's_ version of Github-flavored Markdown. This differs slightly in styling and syntax from what Github uses, so what you see below might vary a little from what you get in a _Markdown Here_ email, but it should be pretty close.
 
-## Headers
+## Horizontal Rules
 
-```
-# H1
-## H2
-### H3
-#### H4
-##### H5
-###### H6
+___
 
-Alternatively, for H1 and H2, an underline-ish style:
+---
 
-Alt-H1
-======
+***
 
-Alt-H2
-------
 
-```
+## Typographic replacements
 
-# H1
+Enable typographer option to see result.
 
-## H2
+(c) (C) (r) (R) (tm) (TM) (p) (P) +-
 
-### H3
+test.. test... test..... test?..... test!....
 
-#### H4
+!!!!!! ???? ,,  -- ---
 
-##### H5
+"Smartypants, double quotes" and 'single quotes'
 
-###### H6
-
-Alternatively, for H1 and H2, an underline-ish style:
-
-# Alt-H1
-
-## Alt-H2
 
 ## Emphasis
 
-```md
-Emphasis, aka italics, with _asterisks_ or _underscores_.
+**This is bold text** __This is bold text__
 
-Strong emphasis, aka bold, with **asterisks** or **underscores**.
+*This is italic text* _This is italic text_
 
-Combined emphasis with **asterisks and _underscores_**.
-```
+~~Strikethrough~~
 
-Emphasis, aka italics, with _asterisks_ or _underscores_.
-
-Strong emphasis, aka bold, with **asterisks** or **underscores**.
-
-Combined emphasis with **asterisks and _underscores_**.
-
-## Lists
-
-```md
-1. First ordered list item
-2. Another item
-   - Unordered sub-list.
-3. Actual numbers don't matter, just that it's a number
-   1. Ordered sub-list
-4. And another item.
-
-   Some text that should be aligned with the above item.
-
-- Unordered list can use asterisks
-
-* Or minuses
-
-- Or pluses
-```
-
-1. First ordered list item
-2. Another item
-   - Unordered sub-list.
-3. Actual numbers don't matter, just that it's a number
-   1. Ordered sub-list
-4. And another item.
-
-   Some text that should be aligned with the above item.
-
-- Unordered list can use asterisks
-
-* Or minuses
-
-- Or pluses
-
-## Links
-
-There are two ways to create links.
-
-```md
-[I'm an inline-style link](https://www.google.com)
-
-[I'm a reference-style link][arbitrary case-insensitive reference text]
-
-[You can use numbers for reference-style link definitions][1]
-
-Or leave it empty and use the [link text itself][]
-
-Some text to show that the reference links can follow later.
-
-[arbitrary case-insensitive reference text]: https://www.mozilla.org
-[1]: http://slashdot.org
-[link text itself]: http://www.reddit.com
-```
-
-[I'm an inline-style link](https://www.google.com)
-
-[I'm a reference-style link][arbitrary case-insensitive reference text]
-
-[You can use numbers for reference-style link definitions][1]
-
-Or leave it empty and use the [link text itself][]
-
-Some text to show that the reference links can follow later.
-
-[arbitrary case-insensitive reference text]: https://www.mozilla.org
-[1]: http://slashdot.org
-[link text itself]: http://www.reddit.com
-
-## Images
-
-```md
-Here's our logo (hover to see the title text):
-
-Inline-style:
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
-
-Reference-style:
-![alt text][logo]
-
-[logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 2"
-```
-
-Here's our logo (hover to see the title text):
-
-Inline-style:
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
-
-Reference-style:
-![alt text][logo]
-
-[logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 2"
-
-## Tables
-
-```md
-|                  | ASCII                           | HTML                          |
-| ---------------- | ------------------------------- | ----------------------------- |
-| Single backticks | `'Isn't this fun?'`             | 'Isn't this fun?'             |
-| Quotes           | `"Isn't this fun?"`             | "Isn't this fun?"             |
-| Dashes           | `-- is en-dash, --- is em-dash` | -- is en-dash, --- is em-dash |
-```
-
-|                  | ASCII                           | HTML                          |
-| ---------------- | ------------------------------- | ----------------------------- |
-| Single backticks | `'Isn't this fun?'`             | 'Isn't this fun?'             |
-| Quotes           | `"Isn't this fun?"`             | "Isn't this fun?"             |
-| Dashes           | `-- is en-dash, --- is em-dash` | -- is en-dash, --- is em-dash |
-
-```md
-| left-aligned column | centered column | right-aligned column |
-| :------------------ | :-------------: | -------------------: |
-| content content     | content content |      content content |
-```
-
-| left-aligned column | centered column | right-aligned column |
-| :------------------ | :-------------: | -------------------: |
-| content content     | content content |      content content |
-
-```md
-| overflow | overflow | overflow | overflow | overflow | overflow | overflow | overflow | overflow | overflow |
-| :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: |
-| :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: |
-```
-
-| overflow | overflow | overflow | overflow | overflow | overflow | overflow | overflow | overflow | overflow | overflow | overflow | overflow | overflow | overflow | overflow | overflow | overflow | overflow | overflow |
-| :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: |
-| :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: |
-
-## Code and Syntax Highlighting
-
-Code blocks are part of the Markdown spec, but syntax highlighting isn't. However, many renderers -- like Github's and _Markdown Here_ -- support syntax highlighting. _Markdown Here_ supports highlighting for dozens of languages (and not-really-languages, like diffs and HTTP headers); to see the complete list, and how to write the language names, see the [highlight.js demo page](http://softwaremaniacs.org/media/soft/highlight/test.html).
-
-```md
-Inline `code` has `back-ticks around` it.
-```
-
-Inline `code` has `back-ticks around` it.
-
-Blocks of code are either fenced by lines with three back-ticks <code>```</code>, or are indented with four spaces. I recommend only using the fenced code blocks -- they're easier and only they support syntax highlighting.
-
-````md
-    ```javascript
-    var s = "JavaScript syntax highlighting";
-    alert(s);
-    ```
-
-    ```python
-    s = "Python syntax highlighting"
-    print s
-    ```
-
-    ```
-    No language indicated, so no syntax highlighting.
-    But let's throw in a <b>tag</b>.
-    ```
-````
-
-```javascript
-var s = "JavaScript syntax highlighting";
-alert(s);
-```
-
-```python
-s = "Python syntax highlighting"
-print s
-```
-
-```
-No language indicated, so no syntax highlighting in Markdown Here (varies on Github).
-But let's throw in a <b>tag</b>.
-```
-
-(Github Wiki pages don't seem to support syntax highlighting, so the above won't be colourful (the strings are not red, for example). Try it out in a _Markdown Here_ email or a Github Markdown README or Github Issue -- you can preview a new Issue without submitting it.)
-
-Again, to see what languages are available for highlighting, and how to write those language names, see the [highlight.js demo page](http://softwaremaniacs.org/media/soft/highlight/test.html).
 
 ## Blockquotes
 
-```md
-> Blockquotes are very handy in email to emulate reply text.  
-> This line is part of the same quote.
 
-Quote break.
+> Blockquotes can also be nested...
+>> ...by using additional greater-than signs right next to each other...
+> > > ...or with spaces between arrows.
 
-> This is a very long line that will still be quoted properly when it wraps. Oh boy let's keep writing to make sure this is long enough to actually wrap for everyone. Oh, you can _put_ **Markdown** into a blockquote.
-```
 
-> Blockquotes are very handy in email to emulate reply text.  
-> This line is part of the same quote.
+## Lists
 
-Quote break.
+Unordered
 
-> This is a very long line that will still be quoted properly when it wraps. Oh boy let's keep writing to make sure this is long enough to actually wrap for everyone. Oh, you can _put_ **Markdown** into a blockquote.
++ Create a list by starting a line with `+`, `-`, or `*`
++ Sub-lists are made by indenting 2 spaces:
+  - Marker character change forces new list start:
+    * Ac tristique libero volutpat at
+    + Facilisis in pretium nisl aliquet
+    - Nulla volutpat aliquam velit
++ Very easy!
 
-## Inline HTML
+Ordered
 
-You can also use raw HTML in your Markdown, and it'll mostly work pretty well. Here are a couple of common examples:
+1. Lorem ipsum dolor sit amet
+2. Consectetur adipiscing elit
+   1. Integer molestie lorem at massa
 
-```html
-<p>Press<kbd>Ctrl</kbd>+<kbd>W</kbd>to close this window</p>
-```
+3. You can use sequential numbers...
+4. ...or keep all the numbers as `1.`
 
-<p>Press<kbd>Ctrl</kbd>+<kbd>W</kbd>to close this window</p>
+Start numbering with offset:
 
-Github-flavored Markdown supports a special table syntax, but _Markdown Here_ does not support it yet. [There's an issue for it.](https://github.com/adam-p/markdown-here/issues/13)
+57. foo
+1. bar
 
-## Horizontal Rule
+- [ ] todo list item1
+- [x] todo list item2 checked
+  - [ ] todo list item3
+    - [ ] todo list item4
+      - [ ] todo list item5
+        - [ ] todo list item6
 
-```md
-Three or more...
+mixed:
 
----
+- this is a mixed list
+1. Lorem ipsum dolor sit amet
+   1. Integer mol
+   - Integer
+   - [ ] todo list item
+   59. Integer mol
+   - [x] todo list item
 
-Hyphens
+## Code
 
----
+Inline `code and with syntax highlight: console.log("hw")`{.js}
 
-Asterisks
+Indented code
 
----
+    // Some comments
+    line 1 of code
+    line 2 of code
+    line 3 of code
 
-Underscores
-```
 
-Three or more...
-
----
-
-Hyphens
-
----
-
-Asterisks
-
----
-
-Underscores
-
-## Line Breaks
-
-My basic recommendation for learning how line breaks work is to experiment and discover -- hit &lt;Enter&gt; once, then hit it twice, see what happens. You'll soon learn to get what you want. "Markdown Toggle" is your friend.
-
-Here are some things to try out:
+Block code "fences"
 
 ```md
-With only a single newline, this line and
-this line will be a _single line_.
-
-But this one is separated by two newlines and so will be a _separate paragraph_.
-
-This line has two spaces at the end (hard for you to see, but trust me!).  
-So this is a separate line in the _same paragraph_.
+Sample text here...
 ```
 
-With only a single newline, this line and
-this line will be a _single line_.
+Syntax highlighting
 
-But this one is separated by two newlines and so will be a _separate paragraph_.
+```js
+var foo = function (bar) {
+  return bar++;
+};
+console.log(foo(5));
+hash(str) { if (!str) return 0; return str.split("").reduce((a, b) => { a = (a << 5) - a + b.charCodeAt(0); return a & a; }, 0); }
+console.log("this will make sure an overflow occur. text, text, text, text, text, text, text, text, text, text, text, text, text, text, text, text, text, text, text, text, text, text, text")
+```
 
-This line has two spaces at the end (hard for you to see, but trust me!).  
-So this is a separate line in the _same paragraph_.
+## Tables
+
+| Option | Description |
+| ------ | ----------- |
+| data   | path to data files to supply the data that will be passed into templates. | 
+| engine | engine to be used for processing templates. Handlebars is the default. | 
+| ext    | extension to be used for dest files. |
+
+
+| Option | Description | Description | Overflow | Overflow | Overflow | Overflow | Overflow |
+| ------ | ----------- | -----------:| -------- | -------- | -------- | -------- | -------- |
+| data   | path to data files to supply the data that will be passed into templates. | path to data files to supply the data that will be passed into templates. ||||||
+| engine | engine to be used for processing templates. Handlebars is the default. | engine to be used for processing templates. Handlebars is the default. ||||||
+| ext    | extension to be used for dest files. | extension to be used for dest files. ||||||
+
+## Links
+
+[external link](http://dev.nodeca.com)
+
+[external link with title](http://nodeca.github.io/pica/demo/ "title text!")
+
+[internal link](/blog/)
+
+[heading](#links)
+
+Autoconverted link https://github.com/nodeca/pica (enable linkify to see)
+
+## Images
+
+![Minion](https://octodex.github.com/images/minion.png)
+![Stormtroopocat](https://octodex.github.com/images/stormtroopocat.jpg "The Stormtroopocat")
+
+Like links, Images also have a footnote style syntax
+
+![Alt text][id]
+
+With a reference later in the document defining the URL location:
+
+[id]: https://octodex.github.com/images/dojocat.jpg  "The Dojocat"
+
+
+## Plugins
+
+The killer feature of `markdown-it` is very effective support of [syntax plugins](https://www.npmjs.org/browse/keyword/markdown-it-plugin).
+
+
+### [Emojies](https://github.com/markdown-it/markdown-it-emoji)
+
+> Classic markup: :wink: :crush: :cry: :tear: :laughing: :yum:
+>
+> Shortcuts (emoticons): :-) :-( 8-) ;)
+
+see [how to change output](https://github.com/markdown-it/markdown-it-emoji#change-output) with twemoji.
+
+
+### [Subscript](https://github.com/markdown-it/markdown-it-sub) / [Superscript](https://github.com/markdown-it/markdown-it-sup)
+
+- 19^th^
+- H~2~O
+
+
+### [\<ins>](https://github.com/markdown-it/markdown-it-ins)
+
+++Inserted text++
+
+
+### [\<mark>](https://github.com/markdown-it/markdown-it-mark)
+
+surrounded by regular text ==Marked text== surrounded by regular text
+surrounded by regular text <kbd>Ctrl</kbd> `code` surrounded by regular text
+
+### [Footnotes](https://github.com/markdown-it/markdown-it-footnote)
+
+Footnote 1 link[^first].
+
+Footnote 2 link[^second].
+
+Inline footnote^[Text of inline footnote] definition.
+
+Duplicated footnote reference[^second].
+
+[^first]: Footnote **can have markup**
+
+    and multiple paragraphs.
+
+[^second]: Footnote text.
+
+
+### [Definition lists](https://github.com/markdown-it/markdown-it-deflist)
+
+Term 1
+
+:   Definition 1
+with lazy continuation.
+
+Term 2 with *inline markup*
+
+:   Definition 2
+
+        { some code, part of Definition 2 }
+
+    Third paragraph of definition 2.
+
+_Compact style:_
+
+Term 1
+  ~ Definition 1
+
+Term 2
+  ~ Definition 2a
+  ~ Definition 2b
+
+
+### [Abbreviations](https://github.com/markdown-it/markdown-it-abbr)
+
+This is HTML abbreviation example.
+
+It converts "HTML", but keep intact partial entries like "xxxHTMLyyy" and so on.
+
+*[HTML]: Hyper Text Markup Language
+
+### [Custom containers](https://github.com/markdown-it/markdown-it-container)
+
+::: hint-warning
+*here be dragons*
+multi-line
+test line-wrap, test line-wrap, test line-wrap, test line-wrap, test line-wrap, test line-wrap, test line-wrap, test line-wrap, test line-wrap, test line-wrap, test line-wrap, test line-wrap, test line-wrap, test line-wrap, test line-wrap, test line-wrap, test line-wrap, test line-wrap, test line-wrap
+:::
+
+::: hint-danger
+hint-danger
+:::
+
+::: hint-info
+hint-info
+:::
+
+::: hint-tip
+hint-tip
+:::
 
 ## Equation
 
-Inline equation $ \Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,. $
-or $$ \Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,. $$
-
-And block of equation:
+Euler\'s identity $e^{i \pi}+1=0$ is a beautiful formula in.
 
 $$
-\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
+e^{i \pi}+1=0
 $$
 
-## Remark Plugins
-
-!> Here is a tip.
-
-?> And a warning.
-
-x> Or an error.
-
-!> Tip or warning or error can be multiline \[Not Recommanded\]  
-Just as this tip demonstrates
+## Markdown-It Plugins

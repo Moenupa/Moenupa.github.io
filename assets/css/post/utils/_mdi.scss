@@ -1,0 +1,21 @@
+.v-post {
+  // link icon font tweaks
+  a:before,
+  a:after,
+  *[class^="hint"] > *:before,
+  li:before,
+  input + label:before,
+  h1:after,
+  h2:after,
+  h3:after,
+  h4:after,
+  h5:after,
+  h6:after {
+    display: inline-block;
+    font: normal normal normal 24px/1 "Material Design Icons";
+    font-size: inherit;
+    text-rendering: auto;
+    line-height: inherit;
+    -webkit-font-smoothing: antialiased;
+  }
+}

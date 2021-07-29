@@ -1,0 +1,95 @@
+@import "~vuetify/src/styles/settings/_index";
+@import "~vuetify/src/styles/elements/_index";
+
+$headingFontInherit: () !default;
+$headingFontInherit: map-deep-merge(
+  (
+    "h1": "h3",
+    "h2": "h4",
+    "h3": "h5",
+    "h4": "h6",
+    "h5": "h6",
+    "h6": "h6"
+  ),
+  $headingFontInherit
+);
+
+$headingColors: () !default;
+$headingColors: map-deep-merge(
+  (
+    "h1": "red",
+    "h2": "pink",
+    "h3": "blue",
+    "h4": "teal",
+    "h5": "lime",
+    "h6": "orange"
+  ),
+  $headingColors
+);
+
+$headingIcons: () !default;
+$headingIcons: map-deep-merge(
+  (
+    "h1": "\F026B",
+    "h2": "\F026C",
+    "h3": "\F026D",
+    "h4": "\F026E",
+    "h5": "\F026F",
+    "h6": "\F0270"
+  ),
+  $headingIcons
+);
+
+.v-post {
+  @each $heading, $fonts in $headingFontInherit {
+    #{$heading} {
+      font-size: map-deep-get($headings, $fonts, "size");
+      font-weight: map-deep-get($headings, $fonts, "weight");
+      line-height: map-deep-get($headings, $fonts, "line-height");
+      letter-spacing: map-deep-get($headings, $fonts, "letter-spacing");
+      font-family: map-deep-get($headings, $fonts, "font-family");
+      margin-top: 1.5em;
+      margin-bottom: 1em;
+      $icon: map-get($headingIcons, $heading);
+      &:after {
+        font-size: 1rem;
+        padding-left: .2em;
+        vertical-align: text-top;
+        content: $icon;
+      }
+    }
+  }
+}
+
+.theme--dark {
+  // colored to be more recognizable
+  .v-post {
+    @each $heading, $color in $headingColors {
+      #{$heading} {
+        color: map-deep-get($colors, $color, "lighten-2");
+      }
+    }
+    em {
+      color: map-get($yellow, "lighten-3");
+    }
+    th {
+      color: map-get($cyan, "lighten-4");
+    }
+    strong {
+      color: map-get($red, "lighten-3");
+    }
+  }
+}
+
+.theme--light {
+  .v-post {
+    @each $heading, $color in $headingColors {
+      #{$heading} {
+        color: map-deep-get($colors, $color, "darken-2");
+      }
+    }
+    th {
+      color: map-get($cyan, "darken-3");
+    }
+  }
+}

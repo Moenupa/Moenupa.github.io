@@ -53,7 +53,7 @@
         </v-btn>
       </template>
       <span>{{
-        $vuetify.theme.dark ? "Switch to Light Theme" : "Switch to Dark Theme"
+        `Switch to ${$vuetify.theme.dark ? 'Light' : 'Dark'} Theme`
       }}</span>
     </v-tooltip>
     <v-tooltip left>
@@ -64,11 +64,25 @@
       </template>
       <span>Navigation Page</span>
     </v-tooltip>
+    <v-tooltip left v-if="settings ? settings.blog_dashboard : false">
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn v-bind="attrs" v-on="on" fab small to="/blog" nuxt>
+          <v-icon>mdi-view-dashboard</v-icon>
+        </v-btn>
+      </template>
+      <span>Blog Dashboard</span>
+    </v-tooltip>
   </v-speed-dial>
 </template>
 
 <script>
 export default {
+  props: {
+    settings: {
+      type: Object,
+      default: () => {}
+    }
+  },
   data() {
     return {
       direction: "top",
