@@ -1,102 +1,143 @@
 <template>
-  <v-container>
-    <v-row class="my-8" justify="space-around">
-      <v-col cols="12" sm="10" xl="8">
-        <v-card :loading="!expand" class="">
-          <template slot="progress">
-            <v-progress-linear
-              color="deep-purple"
-              height="10"
-              indeterminate
-            ></v-progress-linear>
-          </template>
-          <v-img-lottie
-            :img="{
-              src: article.content.img,
-              slug: article.content.slug,
-              type: 0,
-              height: 300
-            }"
-          >
-          </v-img-lottie>
-          <v-card-title class="text-sm-h4 text-md-h3 before px-sm-8 px-lg-16 mt-2">{{
-            article.content.title
-          }}</v-card-title>
-          <v-card-subtitle class="text-sm-h6 px-4 px-sm-8 px-md-12 px-lg-16 pt-1">
-            {{ article.content.description }}<br />
-          </v-card-subtitle>
-          <v-card-actions class="px-4 px-sm-8 px-md-12 px-lg-16">
-            <v-btn-info
-              v-for="category in categories"
-              :key="category.id"
-              :info="category.content"
-              :icon="`mdi-archive`"
-            ></v-btn-info>
-          </v-card-actions>
-          <v-card-actions class="px-4 px-sm-8 px-md-12 px-lg-16">
-            <v-row>
-              <v-col cols="4">
-                <v-btn-info
-                  v-for="author in authors"
-                  :key="author.id"
-                  :info="author.content"
-                  :icon="`mdi-account`"
-                ></v-btn-info>
-              </v-col>
-              <v-col cols="8">
-                <v-btn-info
-                  v-for="tag in tags"
-                  :key="tag.id"
-                  :info="tag.content"
-                  class="float-right"
-                ></v-btn-info>
-              </v-col>
-            </v-row>
-          </v-card-actions>
-          <v-card-text class="px-4 px-sm-8 px-md-12 px-lg-16">
-            <v-chip-group v-model="selection" column>
-              <v-chip
-                small
-                v-for="chip of [
-                  {
-                    icon: 'mdi-text-box-outline',
-                    text: $utils.post.words(article.content.content) + ' words'
-                  },
-                  {
-                    icon: 'mdi-timer-sand',
-                    text: $utils.post.estimate(article.content.content) + ' mins'
-                  },
-                  {
-                    icon: 'mdi-creation',
-                    text:
-                      'Published: ' + $utils.date.format(meta.createdAt)
-                  },
-                  {
-                    icon: 'mdi-update',
-                    text:
-                      'Updated: ' + $utils.date.format(meta.updatedAt)
-                  }
-                ]"
-                :key="chip.id"
+  <v-app>
+    <v-navigation-drawer expand-on-hover fixed app permanent>
+      <v-list-item link router to="" exact>
+        <v-list-item-icon>
+          <v-icon>mdi-table-of-contents</v-icon>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <v-list-item-title>Contents</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+      <v-divider class="my-2" />
+      <v-list nav dense>
+        <v-list-item
+          v-for="heading in $md.toc"
+          :key="heading.id"
+          link
+          router
+          :to="'#' + heading.slug"
+          exact
+        >
+          <v-list-item-icon>
+            <v-icon
+              :color="$themer.color.indexed(2 * heading.depth - 3)"
+              v-if="heading.depth <= 6 && heading.depth >= 1"
+            >
+              {{ "mdi-format-header-" + heading.depth }}
+            </v-icon>
+            <v-icon v-else>mdi-format-header-pound</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>{{ heading.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+    <v-main class="d-flex justify-center align-center">
+      <v-container style="min-height: calc( 100vh - 60px )">
+        <v-row class="my-8" justify="space-around">
+          <v-col cols="12" sm="10" xl="8">
+            <v-card :loading="!expand" class="">
+              <template slot="progress">
+                <v-progress-linear
+                  color="deep-purple"
+                  height="10"
+                  indeterminate
+                ></v-progress-linear>
+              </template>
+              <v-img-lottie
+                :img="{
+                  src: article.content.img,
+                  slug: article.content.slug,
+                  type: 0,
+                  height: 300
+                }"
               >
-                <v-icon left>{{ chip.icon }}</v-icon>
-                {{ chip.text }}
-              </v-chip>
-            </v-chip-group>
-          </v-card-text>
-          <v-divider class="my-4" />
-          <!-- <v-btn block @click="expand = !expand">{{ expand ? 'close' : 'open'}}</v-btn> -->
-          <v-expand-transition>
-            <v-post
-              class="py-4 pb-sm-8 px-4 px-sm-8 px-md-12 px-lg-16"
-              :text="article.content.content"
-              v-show="expand"
-            ></v-post>
-          </v-expand-transition>
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+              </v-img-lottie>
+              <v-card-title class="text-sm-h4 text-md-h3 px-4 px-sm-8 px-md-12 px-lg-16 mt-2">{{
+                article.content.title
+              }}</v-card-title>
+              <v-card-subtitle class="text-sm-h6 px-4 px-sm-8 px-md-12 px-lg-16 pt-1">
+                {{ article.content.description }}<br />
+              </v-card-subtitle>
+              <v-card-actions class="px-4 px-sm-8 px-md-12 px-lg-16">
+                <v-btn-info
+                  v-for="category in categories"
+                  :key="category.id"
+                  :info="category.content"
+                  :icon="`mdi-archive`"
+                ></v-btn-info>
+              </v-card-actions>
+              <v-card-actions class="px-4 px-sm-8 px-md-12 px-lg-16">
+                <v-row>
+                  <v-col cols="4">
+                    <v-btn-info
+                      v-for="author in authors"
+                      :key="author.id"
+                      :info="author.content"
+                      :icon="`mdi-account`"
+                    ></v-btn-info>
+                  </v-col>
+                  <v-col cols="8">
+                    <v-btn-info
+                      v-for="tag in tags"
+                      :key="tag.id"
+                      :info="tag.content"
+                      class="float-right"
+                    ></v-btn-info>
+                  </v-col>
+                </v-row>
+              </v-card-actions>
+              <v-card-text class="px-4 px-sm-8 px-md-12 px-lg-16">
+                <v-chip-group v-model="selection" column>
+                  <v-chip
+                    small
+                    v-for="chip of [
+                      {
+                        icon: 'mdi-text-box-outline',
+                        text: $utils.post.words(article.content.content) + ' words'
+                      },
+                      {
+                        icon: 'mdi-timer-sand',
+                        text: $utils.post.estimate(article.content.content) + ' mins'
+                      },
+                      {
+                        icon: 'mdi-creation',
+                        text:
+                          'Published: ' + $utils.date.format(meta.createdAt)
+                      },
+                      {
+                        icon: 'mdi-update',
+                        text:
+                          'Updated: ' + $utils.date.format(meta.updatedAt)
+                      }
+                    ]"
+                    :key="chip.id"
+                  >
+                    <v-icon left>{{ chip.icon }}</v-icon>
+                    {{ chip.text }}
+                  </v-chip>
+                </v-chip-group>
+              </v-card-text>
+              <v-divider class="my-4" />
+              <!-- <v-btn block @click="expand = !expand">{{ expand ? 'close' : 'open'}}</v-btn> -->
+              <v-expand-transition>
+                <v-post
+                  class="py-4 pb-sm-8 px-4 px-sm-8 px-md-12 px-lg-16"
+                  :text="article.content.content"
+                  v-show="expand"
+                ></v-post>
+              </v-expand-transition>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
+      <FunctionBar :settings="{ blog_dashboard: true }"/>
+      <v-footer-blog :mod="{inset: true}"></v-footer-blog>
+    </v-main>
+  </v-app>
 </template>
 <script>
 export default {
@@ -159,11 +200,12 @@ export default {
       selection: []
     };
   },
-  async asyncData({ app, route }) {
-    const slug = route.params.slug
-    const res = await app.$storyapi.get('cdn/stories', {
+  async asyncData({ params, query, $storyapi }) {
+    const slug = params.slug
+    const res = await $storyapi.get('cdn/stories', {
       starts_with: 'articles/',
       by_slugs: '*/' + slug,
+      language: query.lang,
       resolve_relations: ["article.authors", "article.tags", "article.categories"]
     })
  
@@ -182,7 +224,7 @@ export default {
       this.expand = true;
     }, 1000);
   },
-  layout: "blog"
+  layout: "raw"
 };
 </script>
 

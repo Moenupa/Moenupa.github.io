@@ -1,7 +1,9 @@
 <template>
   <v-footer :inset="mod.inset ? true : false" :fixed="mod.fixed ? true : false">
-    <v-chip-group class="float-right" column>
+    <v-chip-group class="mr-8" column>
       <v-chip
+        small
+        label
         v-for="chip of chips"
         :key="chip.id"
         :href="`${chip.link}${chip.linkpin ? '' : $nuxt.$route.path}`"
@@ -10,20 +12,30 @@
           v-if="chip.icon"
           :color="`${chip.color}${$themer.color.adjust()}`"
         >
-          {{ chip.icon }}
+          {{ chip.icon }} mdi-18px
         </v-icon>
-        <span v-if="chip.icon" class="text-button pl-2">
-          {{ chip.title }}
+        <span
+          v-if="chip.icon"
+          class="ml-2"
+          style="font-weight: 500; letter-spacing: .8px;"
+        >
+          {{ chip.title.toUpperCase() }}
         </span>
         <img
           v-else
           :src="
-            `/img/${chip.title}-${$vuetify.theme.dark ? 'dark' : 'light'}.svg`
+            `/logo/${chip.title}-${$vuetify.theme.dark ? 'dark' : 'light'}.svg`
           "
           :style="`${chip.style ? chip.style : 'height: 60%'}; width: auto`"
         />
-        <v-divider vertical class="mx-2"></v-divider>
-        <span v-if="chip.type" class="text-button">{{ chip.type }}</span>
+        <v-chip
+          v-if="chip.type"
+          small
+          label
+          :color="$themer.color.seeded(chip.type, true)"
+          class="ml-2 mr-n3 px-2"
+          >{{ chip.type }}</v-chip
+        >
       </v-chip>
     </v-chip-group>
   </v-footer>
@@ -42,30 +54,61 @@ export default {
       chips: [
         {
           title: "netlify",
-          type: "static",
+          type: "Static",
           link: "https://moenupa.netlify.app",
-          style: "height: 60%"
+          style: "height: 70%"
         },
         {
           title: "vercel",
-          type: "ssr",
+          type: "SSR",
           link: "https://homepage-moenupa.vercel.app",
-          style: "height: 50%"
+          style: "height: 58%"
         },
         {
           title: "github pages",
           icon: "mdi-github",
           color: "purple",
-          type: "static",
+          type: "Static",
           link: "https://moenupa.github.io"
         },
         {
           title: "git",
           icon: "mdi-git",
           color: "green",
-          type: "source",
+          type: "Source",
           link:
-            "https://github.com/Moenupa/homepage/tree/master/content/articles",
+            "https://github.com/Moenupa/Moenupa.github.io",
+          linkpin: true
+        },
+        {
+          title: "by-nc-sa 4.0",
+          icon: "mdi-copyright",
+          color: "blue-grey",
+          type: "Copyright",
+          link: "http://creativecommons.org/licenses/by-nc-sa/4.0/",
+          linkpin: true
+        },
+        {
+          title: "storyblok",
+          style: "height: 72%",
+          type: "CMS",
+          link: "https://storyblok.com/",
+          linkpin: true
+        },
+        {
+          title: "vuetifyjs",
+          icon: "mdi-vuetify",
+          color: "blue",
+          type: "UI",
+          link: "https://vuetifyjs.com/",
+          linkpin: true
+        },
+        {
+          title: "nuxt",
+          icon: "mdi-nuxt",
+          color: "green",
+          type: "Framework",
+          link: "https://nuxtjs.org/",
           linkpin: true
         }
       ]

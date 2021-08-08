@@ -2,7 +2,7 @@
   <v-btn
     :to="
       info.name
-        ? `/blog/info/${info.name}`
+        ? `/blog/${info.component}/${info.name}`
         : `/blog`
     "
     :color="$themer.color.seeded(info.name)"
