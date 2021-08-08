@@ -28,6 +28,9 @@ jobs:
 
       - name: Generate
         run: npm run generate
+        env:
+          BASE_URL: ${{ secrets.BASE_URL }}
+          STORYBLOK_KEY: ${{ secrets.STORYBLOK_KEY }}
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3

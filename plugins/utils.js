@@ -1,4 +1,4 @@
-export default ({ app }, inject) => {
+export default ({}, inject) => {
   const utils = {
     name: "utils",
     date: {

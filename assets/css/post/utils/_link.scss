@@ -17,7 +17,11 @@
   a[href^="http"]:after {
     content: "\F03CC";
   }
-  a[aria-hidden="true"]:before, a[aria-hidden="true"]:after, .footnote-ref a:before, a.footnote-backref:before{
+  a[aria-hidden="true"]:before,
+  a[aria-hidden="true"]:after,
+  .footnote-ref a:before,
+  a.footnote-backref:before,
+  .table-of-contents a:before {
     content: "" !important;
   }
 
@@ -27,7 +31,7 @@
     text-align: center;
     font-size: 1em;
     margin-left: -1.3em;
-    margin-right: .3em;
+    margin-right: 0.3em;
     color: inherit;
     &:before {
       color: inherit;
@@ -35,7 +39,7 @@
       content: "\F069F" !important;
       visibility: hidden;
       opacity: 0;
-      transition: all 0.2s ease-in-out
+      transition: all 0.2s ease-in-out;
     }
   }
   *:hover {

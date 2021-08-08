@@ -8,6 +8,11 @@
     border-top: 2px ridge;
   }
 
+  kbd, code {
+    margin-left: 4px;
+    margin-right: 4px;
+  }
+
   // global border radius
   blockquote,
   div[class^="hint-"],

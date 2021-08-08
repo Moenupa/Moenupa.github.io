@@ -38,9 +38,11 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    // TODO: integrate @nuxtjs/i18n and query
+    // { src: "~/plugins/locale" },
+    { src: "~/plugins/markdown-it" },
     { src: "~/plugins/themer" },
-    { src: "~/plugins/utils" },
-    { src: "~/plugins/markdown-it" }
+    { src: "~/plugins/utils" }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -53,32 +55,17 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/vuetify
     "@nuxtjs/vuetify",
+    // "@nuxtjs/i18n",
     ["nuxt-clipboard", { autoSetContainer: true }],
     [
       "storyblok-nuxt",
       { accessToken: process.env.STORYBLOK_KEY, cacheProvider: "memory" }
     ]
-    // "@nuxtjs/sitemap"
   ],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ["~/assets/variables.scss"]
-  },
-
-  // Sitemap module configuration: https://go.nuxtjs.dev/config-sitemap
-  sitemap: {
-    hostname: process.env.BASE_URL,
-    routes() {
-      return async () => {
-        const { $content } = require("@nuxt/content");
-        const files = await $content({ deep: true })
-          .only(["path"])
-          .fetch();
-
-        return files.map(file => (file.path === "/index" ? "/" : file.path));
-      };
-    }
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -93,5 +80,24 @@ export default {
     }
   },
 
-  loading: '~/components/Loading.vue'
+  i18n: {
+    locales: [
+      {
+        code: "en",
+        iso: "en-US",
+        name: "English"
+      },
+      {
+        code: "zh-cn",
+        iso: "zh-CN",
+        name: "简体中文"
+      }
+    ],
+    defaultLocale: "en",
+    vueI18n: {
+      fallbackLocale: "en"
+    }
+  },
+
+  loading: "~/components/Loading.vue"
 };

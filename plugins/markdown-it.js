@@ -10,34 +10,34 @@ import deflist from "markdown-it-deflist";
 import div from "markdown-it-div";
 import emoji from "markdown-it-emoji";
 import footnote from "markdown-it-footnote";
+import highlightjs from "markdown-it-highlightjs";
 import ins from "markdown-it-ins";
+import list from "markdown-it-task-lists";
 import mark from "markdown-it-mark";
 import playground from "markdown-it-playground";
-import highlightjs from "markdown-it-highlightjs";
 import sub from "markdown-it-sub";
 import sup from "markdown-it-sup";
 import table from "markdown-it-multimd-table";
-import list from "markdown-it-task-lists";
 import tex from "markdown-it-texmath";
 
-export default ({}, inject) => {
+// import
+import slugify from "slugify";
+
+export default ({ }, inject) => {
   const md = new MarkdownIt({
     preset: "default",
     html: true,
+    xhtmlOut: true,
     linkify: true,
     typographer: true,
     breaks: true
   });
 
-  md.use(abbr);
-  md.use(anchor, {
-    permalink: anchor.permalink.ariaHidden({
-      class: "heading-anchor",
-      symbol: "",
-      space: false,
-      placement: "before"
-    })
+  var toc = [];
+  md.use(highlightjs, {
+    inline: true
   });
+  md.use(abbr);
   md.use(attrs);
   md.use(container);
   md.use(deflist);
@@ -45,9 +45,13 @@ export default ({}, inject) => {
   md.use(emoji);
   md.use(footnote);
   md.use(ins);
+  md.use(list, {
+    enabled: true,
+    label: true,
+    labelAfter: true
+  });
   md.use(mark);
   md.use(playground);
-  md.use(highlightjs);
   md.use(sub);
   md.use(sup);
   md.use(table, {
@@ -55,14 +59,24 @@ export default ({}, inject) => {
     rowspan: true,
     headerless: true
   });
-  md.use(list, {
-    enabled: true,
-    label: true,
-    labelAfter: true
-  });
   md.use(tex, {
     engine: require("katex"),
   });
-  
+
+  // sequence does matter here
+  md.use(anchor, {
+    slugify: (s) => slugify(s, { lower: true }),
+    callback: (token, info) => {
+      toc.push({ depth: token.markup.length, slug: info.slug, title: info.title })
+    },
+    permalink: anchor.permalink.ariaHidden({
+      class: "heading-anchor",
+      symbol: "",
+      space: false,
+      placement: "before",
+    })
+  });
+  md.toc = toc;
+
   inject("md", md);
 };

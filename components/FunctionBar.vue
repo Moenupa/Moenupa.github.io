@@ -72,6 +72,14 @@
       </template>
       <span>Blog Dashboard</span>
     </v-tooltip>
+    <!-- <v-tooltip left>
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn v-bind="attrs" v-on="on" fab small :to="{ path: $nuxt.$router.currentRoute, query: { lang: $nuxt.$i18n.locale } }" nuxt>
+          <v-icon>mdi-translate</v-icon>
+        </v-btn>
+      </template>
+      <span>Switch to {{ $locale.next().name }}</span>
+    </v-tooltip> -->
   </v-speed-dial>
 </template>
 
@@ -98,7 +106,7 @@ export default {
     };
   },
   methods: {
-    scrollTop: function() {
+    scrollTop() {
       this.intervalId = setInterval(() => {
         if (window.pageYOffset === 0) {
           clearInterval(this.intervalId);
@@ -106,7 +114,7 @@ export default {
         window.scroll(0, window.pageYOffset - 50);
       }, 20);
     },
-    onScroll: function(e) {
+    onScroll() {
       this.visible = window.scrollY > 150;
     }
   },

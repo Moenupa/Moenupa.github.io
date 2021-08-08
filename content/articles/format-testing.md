@@ -1,18 +1,3 @@
----
-title: Format Testing
-description: Format Testing of nuxt content
-img: https://img.src/not/valid
-alt: my first blog post
-authors:
-  - moenupa
-  - dependabot
-tags:
-  - nuxtjs
-  - javascript
-categories:
-  - web development
----
-
 # h1 Heading 8-)
 ## h2 Heading
 ### h3 Heading
@@ -124,13 +109,11 @@ Sample text here...
 Syntax highlighting
 
 ```js
-var foo = function (bar) {
-  return bar++;
-};
-console.log(foo(5));
 hash(str) { if (!str) return 0; return str.split("").reduce((a, b) => { a = (a << 5) - a + b.charCodeAt(0); return a & a; }, 0); }
 console.log("this will make sure an overflow occur. text, text, text, text, text, text, text, text, text, text, text, text, text, text, text, text, text, text, text, text, text, text, text")
 ```
+
+`console.log(foo(5));`{.js}
 
 ## Tables
 

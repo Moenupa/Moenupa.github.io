@@ -23,7 +23,7 @@ export default ({ $vuetify }, inject) => {
         "blue-grey"
       ],
       // set of enabled colors
-      hierarchy: [0, 1, 2, 5, 7, 8, 9, 11, 12, 13, 15],
+      hierarchy: [0, 1, 2, 5, 7, 8, 9, 11, 12, 13, 15, 2],
       // hash
       hash(str) {
         if (!str) return 0;
@@ -48,8 +48,11 @@ export default ({ $vuetify }, inject) => {
       // get color by index
       indexed(i, bg) {
         return (
-          this.colors[this.hierarchy[Math.abs(i % this.hierarchy.length)]] +
-          this.adjust(bg)
+          this.colors[
+            this.hierarchy[
+              Math.abs((this.hierarchy.length + i) % this.hierarchy.length)
+            ]
+          ] + this.adjust(bg)
         );
       },
       random(bg) {
