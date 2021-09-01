@@ -43,7 +43,7 @@
     "webpack": "^4.46.0"
   },
   "devDependencies": {
-    "@nuxtjs/i18n": "^7.0.1",
+    "@nuxtjs/i18n": "^7.0.3",
     "raw-loader": "^4.0.2"
   }
 }
