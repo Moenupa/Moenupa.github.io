@@ -33,7 +33,7 @@
     "markdown-it-sub": "1.0.0",
     "markdown-it-sup": "1.0.0",
     "markdown-it-task-lists": "^2.1.1",
-    "markdown-it-texmath": "^0.9.1",
+    "markdown-it-texmath": "^0.9.6",
     "nuxt": "2.15.8",
     "nuxt-clipboard": "0.0.6",
     "nuxt-ssr-screen-size": "^1.0.0",
