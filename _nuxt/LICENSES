@@ -1,4 +1,17 @@
 /*!
+  * vue-router v3.5.3
+  * (c) 2021 Evan You
+  * @license MIT
+  */
+
+/*!
+ * Vue.js v2.6.14
+ * (c) 2014-2021 Evan You
+ * Released under the MIT License.
+ */
+
+
+/*!
  * clipboard.js v2.0.8
  * https://clipboardjs.com/
  *
@@ -8,7 +21,7 @@
 /*!
  * storyblok-js-client v0.0.0-development
  * Universal JavaScript SDK for Storyblok's API
- * (c) 2020-2021 Stobylok Team
+ * (c) 2020-2022 Stobylok Team
  */
 
 /*!
@@ -24,16 +37,3 @@
  */
 
 /*! https://mths.be/punycode v1.4.1 by @mathias */
-
-
-/*!
-  * vue-router v3.5.2
-  * (c) 2021 Evan You
-  * @license MIT
-  */
-
-/*!
- * Vue.js v2.6.14
- * (c) 2014-2021 Evan You
- * Released under the MIT License.
- */
