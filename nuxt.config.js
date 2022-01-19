@@ -32,7 +32,7 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     "@/assets/css/main",
-    "~/node_modules/highlight.js/styles/tomorrow-night.css",
+    "~/node_modules/highlight.js/styles/atom-one-dark.css",
     "~/node_modules/katex/dist/katex.min.css"
   ],
 
