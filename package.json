@@ -48,7 +48,7 @@
     "sass": "1.55.0",
     "slugify": "^1.6.0",
     "storyblok-nuxt": "^2.0.1",
-    "webpack": "^5.74.0"
+    "webpack": "^5.75.0"
   },
   "devDependencies": {
     "@nuxtjs/i18n": "^7.0.1",
